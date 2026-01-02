@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Woods | Business Plan</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Toggle Button -->
+        <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar" id="sidebar">
+            <div class="logo-section">
+                <h1 class="logo">El Woods</h1>
+                <p class="tagline">"Fuck normal, I want magic."</p>
+            </div>
+
+            <div class="progress-overview">
+                <h3>Plan Progress</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span class="progress-text" id="progressText">0 of 19 sections complete</span>
+            </div>
+
+            <ul class="nav-list" id="navList">
+                <!-- Populated by JavaScript -->
+            </ul>
+
+            <div class="sidebar-footer">
+                <button class="export-btn" onclick="exportPlan()">Export Plan</button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <div class="header-decoration"></div>
+                <h2 id="currentSectionTitle">Executive Summary</h2>
+                <div class="status-badge" id="statusBadge">Draft</div>
+            </header>
+
+            <div class="section-content" id="sectionContent">
+                <!-- Content loaded dynamically -->
+            </div>
+
+            <div class="section-actions">
+                <button class="btn btn-secondary" onclick="previousSection()">Previous</button>
+                <div class="status-controls">
+                    <label>Status:</label>
+                    <select id="statusSelect" onchange="updateStatus()">
+                        <option value="draft">Draft</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="complete">Complete</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" onclick="nextSection()">Next</button>
+            </div>
+        </main>
+
+        <!-- Edit Panel Overlay -->
+        <div class="edit-overlay" id="editOverlay" onclick="closeEditPanel()"></div>
+
+        <!-- Edit Panel (slides in) -->
+        <aside class="edit-panel" id="editPanel">
+            <div class="edit-header">
+                <h3>Edit Section</h3>
+                <button class="close-btn" onclick="closeEditPanel()">X</button>
+            </div>
+            <div class="edit-body">
+                <textarea id="editContent" placeholder="Enter section content..."></textarea>
+            </div>
+            <div class="edit-footer">
+                <button class="btn btn-secondary" onclick="closeEditPanel()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveContent()">Save Changes</button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Floating Edit Button -->
+    <button class="fab-edit" onclick="openEditPanel()" title="Edit Section">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+            <path fill="currentColor" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+        </svg>
+    </button>
+
+    <script src="app.js"></script>
+</body>
+</html>
