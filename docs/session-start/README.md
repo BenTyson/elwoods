@@ -11,7 +11,7 @@
 - **What**: Business plan webapp for "El Woods" - an immersive sustainable retail + cafe in Denver
 - **Stack**: Vanilla HTML/CSS/JS, JSON data file, Python HTTP server
 - **Port**: 2277
-- **Status**: V2 complete - webapp functional, business plan revised and investor-ready
+- **Status**: V3 in progress - voice overhaul underway (Executive Summary done, 19 sections remaining)
 
 ## Quick Links
 
@@ -24,9 +24,9 @@
 
 ---
 
-## V2 Status (January 2026)
+## V3 Status (January 2026)
 
-The business plan has been through a professional audit and comprehensive revision:
+The business plan has been through a professional audit, comprehensive revision, and is now undergoing a voice overhaul:
 
 | Aspect | Status |
 |--------|--------|
@@ -36,6 +36,10 @@ The business plan has been through a professional audit and comprehensive revisi
 | Traction validated | Pop-up events, $50-75 avg transaction |
 | Exit strategy | Added |
 | Citations | Problem statement cites EPA, EU Parliament, WWF |
+| **Voice overhaul** | **In progress** - Executive Summary complete |
+
+### Voice Direction
+Morgan's voice: edgy, creative, artsy, passionate, driven. Less corporate suit, more founder with conviction.
 
 ---
 

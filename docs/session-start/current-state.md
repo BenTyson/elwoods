@@ -41,9 +41,9 @@ None currently.
 
 ### Section Status (20 Sections)
 
-| # | Section | Status | V2 Notes |
+| # | Section | Status | V2/V3 Notes |
 |---|---------|--------|----------|
-| 1 | Executive Summary | in-progress | Added traction, marketplace vision |
+| 1 | Executive Summary | in-progress | **V3: Voice rewrite complete** - edgy, creative tone |
 | 2 | **Traction & Validation** | in-progress | **NEW** - Pop-up data, venue discussions |
 | 3 | Company Description | in-progress | Updated pledge language |
 | 4 | Problem Statement | in-progress | Cited sources (EPA, WWF) |
@@ -158,12 +158,13 @@ The business plan underwent a professional audit with the following assessment:
 
 ## Potential Next Steps
 
-1. **Final Content Review** - Founders review all V2 content
-2. **Mark Complete** - Change section status from "in-progress" to "complete"
-3. **Add Supporting Documents** - Populate appendix with actual materials
-4. **Concept Art** - Add design mockups for forest immersion
-5. **Investor Targeting** - Identify specific investor outreach list
-6. **Venue Follow-up** - Continue Colorado Mills Mall discussions
+1. **Voice Update (19 sections)** - Apply Morgan's voice to remaining sections
+2. **Final Content Review** - Founders review all V3 content
+3. **Mark Complete** - Change section status from "in-progress" to "complete"
+4. **Add Supporting Documents** - Populate appendix with actual materials
+5. **Concept Art** - Add design mockups for forest immersion
+6. **Investor Targeting** - Identify specific investor outreach list
+7. **Venue Follow-up** - Continue Colorado Mills Mall discussions
 
 ---
 
@@ -189,6 +190,27 @@ The business plan underwent a professional audit with the following assessment:
 - Revised 10% pledge to 5-10% in Year 2+
 - Reconciled all numerical inconsistencies
 - Final consistency review completed
+
+### Session 3 (January 2026)
+- **Voice overhaul initiated** - Morgan felt the document read too "corporate suit"
+- Rewrote Executive Summary with new voice: edgy, creative, passionate, driven
+- Voice characteristics: punchy sentences, first-person, confident without arrogance
+- Removed corporate buzzwords ("conscious consumption," "transformative experience")
+- Added personality while maintaining investor-readiness
+- **In progress**: Remaining 19 sections need voice update to match
+
+---
+
+## Voice Guidelines (New)
+
+Morgan's voice for the business plan:
+- **Edgy, creative, artsy, passionate, driven**
+- First-person ("we're," "our," "us")
+- Short, punchy sentences
+- Confident without arrogance
+- Callbacks to tagline ("Fuck normal, I want magic")
+- Avoid: corporate buzzwords, stiff formality, template language
+- Keep: professionalism, investor-relevant data, clear structure
 
 ---
 

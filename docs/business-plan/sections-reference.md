@@ -37,16 +37,19 @@
 
 **Purpose**: High-level overview of the entire business plan. Should stand alone as a compelling summary for investors.
 
+**V3 Voice Update**: Complete. Rewritten with Morgan's voice—edgy, creative, passionate, driven. Punchy sentences, first-person, confident without arrogance. Bookended with tagline callbacks.
+
 **Key Content**:
-- Business concept overview
-- Three integrated components (Clothing, Cafe, Collective)
-- **Proven Demand** - Pop-up validation ($50-75 avg transaction)
-- Market opportunity (West Denver gap)
+- "Fuck normal, I want magic" - opens with attitude
+- Business concept (forest sanctuary, not just a store)
+- Three components (Wardrobe Revival, Eco Cafe, Collective)
+- **We've Already Tested This** - Pop-up validation ($50-75 avg transaction)
+- **Why West Denver, Why Now** - Market opportunity
 - Financial summary ($85K-$120K startup, $100K-$125K funding)
-- Revenue projections (Year 1: $150K-$180K)
-- Team summary
-- **Vision: El Woods Marketplace** (Year 2+ growth)
-- The ask
+- **Who We Are** - Team summary (married, all in together)
+- **Beyond the Store** - El Woods Marketplace vision
+- **What We're Asking For** - The ask with attitude
+- Closes with: "If you want normal, there are plenty of options. We're building something else."
 
 **Update When**: Any major changes to other sections
 
