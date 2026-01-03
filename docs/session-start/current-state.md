@@ -201,7 +201,7 @@ The business plan underwent a professional audit with the following assessment:
 
 ---
 
-## Voice Guidelines (New)
+## Voice & Style Guidelines
 
 Morgan's voice for the business plan:
 - **Edgy, creative, artsy, passionate, driven**
@@ -211,6 +211,16 @@ Morgan's voice for the business plan:
 - Callbacks to tagline ("Fuck normal, I want magic")
 - Avoid: corporate buzzwords, stiff formality, template language
 - Keep: professionalism, investor-relevant data, clear structure
+
+### Formatting Rules
+
+**DO NOT USE EM-DASHES (—)**
+- Em-dashes are an AI writing tell. Avoid completely.
+- Instead use: periods, commas, colons, or rewrite the sentence
+- Bad: "West Denver—Wheat Ridge, Golden, Arvada—is underserved"
+- Good: "West Denver (Wheat Ridge, Golden, Arvada) is underserved"
+- Bad: "the curve—we're riding it"
+- Good: "the curve. We're riding it."
 
 ---
 

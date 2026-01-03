@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Woods | Business Plan</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        forest: {
+                            950: '#0f1a0f',
+                            900: '#1a2e1a',
+                            800: '#2d4a3e',
+                            700: '#3d6b4f',
+                            600: '#4a7c59',
+                            500: '#5a9268',
+                            400: '#7ab088',
+                            300: '#a3c9ad',
+                            200: '#c8dece',
+                            100: '#e8f0ea',
+                        },
+                        gold: {
+                            600: '#a68a3a',
+                            500: '#c9a959',
+                            400: '#d4b86a',
+                            300: '#e2cc8f',
+                            200: '#f0e4c4',
+                        },
+                        cream: {
+                            100: '#faf9f6',
+                            200: '#f5f2eb',
+                            300: '#e8e4d9',
+                        }
+                    },
+                    fontFamily: {
+                        'display': ['"Cormorant Garamond"', 'serif'],
+                        'body': ['Lato', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- Custom styles for content HTML (from JSON) -->
+    <style>
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar for sidebar */
+        #sidebarNav::-webkit-scrollbar {
+            width: 4px;
+        }
+        #sidebarNav::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        #sidebarNav::-webkit-scrollbar-thumb {
+            background: rgba(90, 146, 104, 0.3);
+            border-radius: 4px;
+        }
+        #sidebarNav::-webkit-scrollbar-thumb:hover {
+            background: rgba(90, 146, 104, 0.5);
+        }
+
+        /* Hero animations */
+        @keyframes glow-pulse {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(90, 146, 104, 0.3)); }
+            50% { filter: drop-shadow(0 0 40px rgba(90, 146, 104, 0.6)); }
+        }
+
+        @keyframes bob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-logo {
+            animation: glow-pulse 4s ease-in-out infinite;
+        }
+
+        .scroll-indicator {
+            animation: bob 2s ease-in-out infinite;
+        }
+
+        .fade-in-up {
+            animation: fade-in-up 1s ease-out forwards;
+        }
+
+        .fade-in-up-delay-1 {
+            animation: fade-in-up 1s ease-out 0.3s forwards;
+            opacity: 0;
+        }
+
+        .fade-in-up-delay-2 {
+            animation: fade-in-up 1s ease-out 0.6s forwards;
+            opacity: 0;
+        }
+
+        /* Scroll reveal for sections */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Card hover effects */
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Sticky nav */
+        .sticky-nav {
+            transform: translateY(-100%);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .sticky-nav.visible {
+            transform: translateY(0);
+        }
+
+        /* TOC item hover */
+        .toc-item {
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        .toc-item:hover {
+            transform: translateX(4px);
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            .hero-logo,
+            .scroll-indicator,
+            .fade-in-up,
+            .fade-in-up-delay-1,
+            .fade-in-up-delay-2 {
+                animation: none;
+                opacity: 1;
+                transform: none;
+            }
+            .reveal {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+            .card-hover:hover {
+                transform: none;
+            }
+        }
+
+        /* ===========================================
+           CONTENT TYPOGRAPHY & SPACING
+           Proper CSS - no @apply (CDN doesn't support it)
+           =========================================== */
+
+        /* Paragraphs */
+        .section-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            color: #4b5563;
+        }
+
+        .section-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Headings */
+        .section-content h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #3d6b4f;
+            margin-top: 3rem;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e8e4d9;
+        }
+
+        .section-content h3:first-child,
+        .section-content > p:first-child + h3 {
+            margin-top: 0;
+        }
+
+        .section-content h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: #4a7c59;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Lists */
+        .section-content ul,
+        .section-content ol {
+            margin: 1.5rem 0;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .section-content li {
+            position: relative;
+            padding-left: 1.75rem;
+            margin-bottom: 0.875rem;
+            line-height: 1.7;
+            font-size: 1.05rem;
+            color: #4b5563;
+        }
+
+        .section-content ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(135deg, #5a9268 0%, #c9a959 100%);
+            border-radius: 50%;
+        }
+
+        .section-content ol {
+            counter-reset: list-counter;
+        }
+
+        .section-content ol li {
+            counter-increment: list-counter;
+        }
+
+        .section-content ol li::before {
+            content: counter(list-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #c9a959;
+        }
+
+        /* Bold text */
+        .section-content strong {
+            color: #1f2937;
+            font-weight: 600;
+        }
+
+        /* Blockquotes - Pull quotes that break out */
+        .section-content blockquote {
+            position: relative;
+            margin: 3rem 0;
+            margin-left: -2rem;
+            margin-right: -2rem;
+            padding: 2.5rem 3rem;
+            background: linear-gradient(135deg, #1a2e1a 0%, #2d4a3e 100%);
+            border-radius: 16px;
+            border: none;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.75rem;
+            font-style: italic;
+            font-weight: 500;
+            color: #faf9f6;
+            line-height: 1.4;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(26, 46, 26, 0.3);
+        }
+
+        @media (min-width: 768px) {
+            .section-content blockquote {
+                margin-left: -3rem;
+                margin-right: -3rem;
+                padding: 3rem 4rem;
+                font-size: 2rem;
+            }
+        }
+
+        .section-content blockquote::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            font-size: 5rem;
+            color: #c9a959;
+            opacity: 0.2;
+            font-family: 'Cormorant Garamond', serif;
+            line-height: 1;
+        }
+
+        .section-content blockquote::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #c9a959, #d4b86a);
+            border-radius: 2px;
+        }
+
+        /* Tables */
+        .section-content table {
+            width: 100%;
+            margin: 2rem 0;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .section-content tr {
+            border-bottom: 1px solid #e8e4d9;
+        }
+
+        .section-content tr:last-child {
+            border-bottom: none;
+        }
+
+        .section-content tr:first-child {
+            background: linear-gradient(135deg, #1a2e1a 0%, #2d4a3e 100%);
+            color: #faf9f6;
+        }
+
+        .section-content td {
+            padding: 1rem 1.25rem;
+            vertical-align: top;
+        }
+
+        .section-content tr:first-child td {
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .section-content tr:not(:first-child):hover {
+            background: #faf9f6;
+        }
+
+        /* ===========================================
+           DATA CARDS - Key metrics that break out
+           =========================================== */
+
+        .section-content .data-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 1.25rem;
+            margin: 2.5rem -1rem;
+            padding: 2rem 1rem;
+            background: linear-gradient(135deg, rgba(90, 146, 104, 0.05) 0%, rgba(201, 169, 89, 0.05) 100%);
+            border-radius: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .section-content .data-grid {
+                grid-template-columns: repeat(3, 1fr);
+                margin: 3rem -2rem;
+                padding: 2.5rem 2rem;
+                gap: 1.5rem;
+            }
+        }
+
+        .section-content .data-card {
+            position: relative;
+            padding: 1.75rem 1.25rem;
+            text-align: center;
+            background: white;
+            border: none;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .section-content .data-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #5a9268 0%, #c9a959 100%);
+        }
+
+        .section-content .data-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 16px 40px rgba(61, 107, 79, 0.18);
+        }
+
+        .section-content .data-card h4 {
+            margin: 0 0 0.5rem 0;
+            padding: 0;
+            border: none;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #4a7c59;
+        }
+
+        .section-content .data-card .value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a2e1a;
+            line-height: 1.1;
+            margin-bottom: 0.25rem;
+        }
+
+        @media (min-width: 768px) {
+            .section-content .data-card .value {
+                font-size: 3rem;
+            }
+        }
+
+        .section-content .data-card .stat-label {
+            font-size: 0.8rem;
+            color: #6b7280;
+            line-height: 1.4;
+        }
+
+        /* ===========================================
+           HIGHLIGHT BOX - For key insights
+           =========================================== */
+        .section-content .highlight-box,
+        .section-content > ul:first-of-type {
+            background: linear-gradient(135deg, #faf9f6 0%, #e8f0ea 100%);
+            border-left: 4px solid #c9a959;
+            border-radius: 0 12px 12px 0;
+            padding: 1.5rem 1.5rem 1.5rem 2rem;
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body class="font-body text-gray-700 bg-gradient-to-br from-slate-50 via-emerald-50/30 to-slate-100 min-h-screen">
+    <!-- Organic background shapes -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden -z-10">
+        <!-- Large gradient blob top right -->
+        <div class="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-emerald-100/40 to-teal-50/20 blur-3xl"></div>
+        <!-- Medium blob left -->
+        <div class="absolute top-1/3 -left-20 w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-amber-100/30 to-yellow-50/20 blur-3xl"></div>
+        <!-- Small accent blob -->
+        <div class="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] rounded-full bg-gradient-to-bl from-emerald-100/30 to-cyan-50/20 blur-3xl"></div>
+        <!-- Bottom gradient -->
+        <div class="absolute bottom-0 left-0 right-0 h-96 bg-gradient-to-t from-emerald-50/50 to-transparent"></div>
+    </div>
+
+    <!-- Sticky Navigation -->
+    <nav id="stickyNav" class="sticky-nav fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-cream-300/50 shadow-sm">
+        <div class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+            <img src="public/TextLogo_Black.png" alt="El Woods" class="h-8 md:h-10">
+            <span id="currentSection" class="text-sm text-forest-700 font-medium hidden md:block"></span>
+        </div>
+        <!-- Progress bar -->
+        <div class="h-0.5 bg-cream-200">
+            <div id="progressBar" class="h-full bg-gradient-to-r from-forest-600 to-gold-500 transition-all duration-150" style="width: 0%"></div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header id="hero" class="relative min-h-screen flex flex-col items-center justify-center text-cream-100 overflow-hidden">
+        <!-- Background image -->
+        <div class="absolute inset-0">
+            <img
+                src="public/ElWoods_ForestBanner2.jpg"
+                alt=""
+                class="w-full h-full object-cover"
+                style="object-position: center 40%;"
+            >
+            <!-- Dark gradient overlay -->
+            <div class="absolute inset-0 bg-gradient-to-b from-forest-950/70 via-forest-950/50 to-forest-950/80"></div>
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10 text-center px-6 py-12">
+            <!-- Stamp Logo -->
+            <div class="fade-in-up mb-8">
+                <img
+                    src="public/ElWoods_Stamp.png"
+                    alt="El Woods Revival"
+                    class="hero-logo w-48 h-48 md:w-64 md:h-64 mx-auto"
+                >
+            </div>
+
+            <!-- Tagline -->
+            <p class="fade-in-up-delay-1 font-display text-2xl md:text-4xl italic text-gold-400 mb-4 max-w-2xl mx-auto">
+                "Fuck normal, I want magic."
+            </p>
+
+            <!-- Subtitle -->
+            <p class="fade-in-up-delay-2 text-lg md:text-xl font-light opacity-90 max-w-xl mx-auto text-cream-200">
+                A sustainable retail and cafe experience in West Denver
+            </p>
+        </div>
+
+        <!-- Scroll indicator -->
+        <a href="#toc" class="scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 text-cream-200/80 hover:text-cream-100 transition-colors">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+            <span class="sr-only">Scroll to contents</span>
+        </a>
+    </header>
+
+    <!-- Main Layout: Sidebar + Content -->
+    <div class="max-w-[1400px] mx-auto px-4 lg:px-8">
+        <div class="lg:flex lg:gap-8">
+
+            <!-- Sticky Sidebar Navigation -->
+            <aside class="hidden lg:block lg:w-72 flex-shrink-0">
+                <div id="sidebarNav" class="sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto">
+                    <!-- Sidebar Header -->
+                    <div class="mb-6">
+                        <img src="public/TextLogo_Black.png" alt="El Woods" class="h-8 mb-4 opacity-80">
+                        <div class="text-xs uppercase tracking-widest text-forest-600 font-semibold">Business Plan</div>
+                    </div>
+
+                    <!-- Progress indicator -->
+                    <div class="mb-6 p-4 bg-white/60 backdrop-blur rounded-xl border border-white/80 shadow-sm">
+                        <div class="flex items-center justify-between text-sm mb-2">
+                            <span class="text-gray-500">Progress</span>
+                            <span id="sidebarProgress" class="font-semibold text-forest-700">0%</span>
+                        </div>
+                        <div class="h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                            <div id="sidebarProgressBar" class="h-full bg-gradient-to-r from-forest-500 to-gold-500 transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Section Links -->
+                    <nav class="space-y-1" id="sidebarTocList">
+                        <!-- Populated by JavaScript -->
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="flex-1 min-w-0">
+                <!-- Mobile TOC Card (hidden on desktop) -->
+                <nav id="toc" class="lg:hidden bg-white/80 backdrop-blur rounded-2xl shadow-xl overflow-hidden -mt-16 relative z-20 mb-12 border border-white/50">
+                    <div class="bg-gradient-to-r from-forest-800 to-forest-700 px-6 py-6">
+                        <h2 class="font-display text-2xl text-white font-semibold">Contents</h2>
+                    </div>
+                    <div class="p-6">
+                        <ol class="grid grid-cols-1 gap-y-1" id="tocList">
+                            <!-- Populated by JavaScript -->
+                        </ol>
+                    </div>
+                </nav>
+
+                <!-- Sections -->
+                <div id="sectionsContainer" class="space-y-10 lg:-mt-16">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </main>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="relative text-cream-100 py-20 px-6 mt-16 overflow-hidden">
+        <!-- Background image -->
+        <div class="absolute inset-0">
+            <img
+                src="public/ElWoods_ForestBanner2.jpg"
+                alt=""
+                class="w-full h-full object-cover"
+                style="object-position: center 60%;"
+            >
+            <div class="absolute inset-0 bg-forest-950/85"></div>
+        </div>
+
+        <!-- Watermark stamp -->
+        <img
+            src="public/ElWoods_Stamp.png"
+            alt=""
+            class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 opacity-[0.08] pointer-events-none"
+        >
+
+        <div class="relative z-10 max-w-4xl mx-auto text-center">
+            <img src="public/ElwoodsRev_White_75op.png" alt="El Woods Revival" class="h-12 md:h-16 mx-auto mb-8 opacity-90">
+
+            <div class="space-y-3 text-sm">
+                <p class="text-cream-200">
+                    <span class="font-semibold text-cream-100">Morgan McIntosh</span>
+                    <span class="mx-2 text-forest-400">|</span>
+                    720.254.9067
+                    <span class="mx-2 text-forest-400">|</span>
+                    elwoods.revival@gmail.com
+                </p>
+                <p class="text-cream-200">
+                    <span class="font-semibold text-cream-100">Benjamin Tyson</span>
+                    <span class="mx-2 text-forest-400">|</span>
+                    720.839.5990
+                    <span class="mx-2 text-forest-400">|</span>
+                    ben@hgraphene.com
+                </p>
+                <p class="pt-4">
+                    <a href="https://instagram.com/elwoods.revival" target="_blank" class="inline-flex items-center gap-2 text-gold-400 hover:text-gold-300 transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        @elwoods.revival
+                    </a>
+                </p>
+            </div>
+
+            <div class="mt-10 pt-6 border-t border-cream-100/20 text-xs text-cream-300/60" id="generatedDate"></div>
+        </div>
+    </footer>
+
+    <script>
+        // Forest divider HTML template
+        const forestDivider = `
+            <div class="relative h-40 md:h-56 my-16 rounded-2xl overflow-hidden shadow-lg">
+                <img
+                    src="public/ElWoods_ForestBanner2.jpg"
+                    alt=""
+                    class="w-full h-full object-cover"
+                    style="object-position: center 50%;"
+                >
+                <div class="absolute inset-0 bg-gradient-to-r from-forest-950/50 via-forest-950/20 to-forest-950/50"></div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <img src="public/ElWoods_Stamp.png" alt="" class="w-20 h-20 md:w-28 md:h-28 opacity-30">
+                </div>
+            </div>
+        `;
+
+        // Tagline divider (used once)
+        const taglineDivider = `
+            <div class="relative h-28 md:h-36 my-16 rounded-2xl overflow-hidden shadow-lg">
+                <img
+                    src="public/FN_banner.jpg"
+                    alt="Fuck normal. I want magic."
+                    class="w-full h-full object-cover object-center"
+                >
+            </div>
+        `;
+
+        async function loadPlan() {
+            try {
+                const response = await fetch('data/business-plan.json');
+                const plan = await response.json();
+                renderPlan(plan);
+                initScrollEffects();
+            } catch (error) {
+                console.error('Error loading plan:', error);
+                document.getElementById('sectionsContainer').innerHTML =
+                    '<p class="text-center py-16 text-gray-500">Error loading business plan.</p>';
+            }
+        }
+
+        function renderPlan(plan) {
+            // Render Mobile Table of Contents
+            const tocList = document.getElementById('tocList');
+            if (tocList) {
+                tocList.innerHTML = plan.sections.map((section, index) => `
+                    <li>
+                        <a href="#section-${section.id}"
+                           class="toc-item group flex items-center gap-4 px-4 py-3 -mx-4 rounded-lg text-gray-600 hover:bg-forest-50 hover:text-forest-800 transition-all">
+                            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-forest-100 group-hover:bg-forest-200 flex items-center justify-center text-forest-700 font-bold text-sm transition-colors">${index + 1}</span>
+                            <span class="font-medium">${section.title}</span>
+                        </a>
+                    </li>
+                `).join('');
+            }
+
+            // Render Sidebar Table of Contents
+            const sidebarTocList = document.getElementById('sidebarTocList');
+            if (sidebarTocList) {
+                sidebarTocList.innerHTML = plan.sections.map((section, index) => `
+                    <a href="#section-${section.id}"
+                       data-section-id="${section.id}"
+                       class="sidebar-link group flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-500 hover:bg-white/60 hover:text-forest-700 transition-all">
+                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-gray-100 group-hover:bg-forest-100 flex items-center justify-center text-gray-400 group-hover:text-forest-600 text-xs font-semibold transition-colors">${index + 1}</span>
+                        <span class="truncate">${section.title}</span>
+                    </a>
+                `).join('');
+            }
+
+            // Render Sections with dividers
+            const container = document.getElementById('sectionsContainer');
+            let sectionsHTML = '';
+
+            plan.sections.forEach((section, index) => {
+                // Add forest divider after sections 5, 10, 15
+                if (index === 5) {
+                    sectionsHTML += forestDivider;
+                } else if (index === 10) {
+                    sectionsHTML += taglineDivider;
+                } else if (index === 15) {
+                    sectionsHTML += forestDivider;
+                }
+
+                sectionsHTML += `
+                    <article class="reveal card-hover bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden border border-white/50" id="section-${section.id}" data-section-title="${section.title}">
+                        <!-- Section header bar -->
+                        <div class="bg-gradient-to-r from-forest-800 via-forest-700 to-forest-800 px-6 md:px-10 py-5">
+                            <div class="flex items-center gap-4">
+                                <span class="flex-shrink-0 w-11 h-11 rounded-xl bg-white/15 backdrop-blur flex items-center justify-center text-gold-400 font-display text-lg font-bold shadow-inner">
+                                    ${String(index + 1).padStart(2, '0')}
+                                </span>
+                                <h2 class="font-display text-xl md:text-2xl text-white font-semibold tracking-wide">
+                                    ${section.title}
+                                </h2>
+                            </div>
+                        </div>
+                        <!-- Section content -->
+                        <div class="section-content px-6 md:px-10 py-8 md:py-10">
+                            ${section.content || '<p class="italic text-gray-400">Content coming soon.</p>'}
+                        </div>
+                    </article>
+                `;
+            });
+
+            container.innerHTML = sectionsHTML;
+
+            // Set generated date
+            document.getElementById('generatedDate').textContent =
+                `Generated ${new Date().toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                })}`;
+        }
+
+        function initScrollEffects() {
+            const hero = document.getElementById('hero');
+            const stickyNav = document.getElementById('stickyNav');
+            const progressBar = document.getElementById('progressBar');
+            const sidebarProgressBar = document.getElementById('sidebarProgressBar');
+            const sidebarProgress = document.getElementById('sidebarProgress');
+            const currentSectionEl = document.getElementById('currentSection');
+            const sections = document.querySelectorAll('article[id^="section-"]');
+            const revealElements = document.querySelectorAll('.reveal');
+            const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+            // Sticky nav visibility
+            const heroObserver = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            stickyNav.classList.remove('visible');
+                        } else {
+                            stickyNav.classList.add('visible');
+                        }
+                    });
+                },
+                { threshold: 0 }
+            );
+            heroObserver.observe(hero);
+
+            // Scroll reveal for sections
+            const revealObserver = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                },
+                { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+            );
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // Current section tracking with sidebar highlight
+            const sectionObserver = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const sectionId = entry.target.id.replace('section-', '');
+                            const title = entry.target.getAttribute('data-section-title');
+
+                            // Update top nav
+                            if (title && currentSectionEl) {
+                                currentSectionEl.textContent = title;
+                            }
+
+                            // Update sidebar highlighting
+                            sidebarLinks.forEach(link => {
+                                const linkId = link.getAttribute('data-section-id');
+                                if (linkId === sectionId) {
+                                    link.classList.add('bg-white/80', 'text-forest-800', 'shadow-sm', 'font-medium');
+                                    link.classList.remove('text-gray-500');
+                                    link.querySelector('span:first-child').classList.add('bg-forest-500', 'text-white');
+                                    link.querySelector('span:first-child').classList.remove('bg-gray-100', 'text-gray-400');
+                                } else {
+                                    link.classList.remove('bg-white/80', 'text-forest-800', 'shadow-sm', 'font-medium');
+                                    link.classList.add('text-gray-500');
+                                    link.querySelector('span:first-child').classList.remove('bg-forest-500', 'text-white');
+                                    link.querySelector('span:first-child').classList.add('bg-gray-100', 'text-gray-400');
+                                }
+                            });
+                        }
+                    });
+                },
+                { threshold: 0.3, rootMargin: '-100px 0px -50% 0px' }
+            );
+            sections.forEach(section => sectionObserver.observe(section));
+
+            // Progress bar (both top nav and sidebar)
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = (scrollTop / docHeight) * 100;
+                const progressValue = Math.min(progress, 100);
+
+                if (progressBar) progressBar.style.width = `${progressValue}%`;
+                if (sidebarProgressBar) sidebarProgressBar.style.width = `${progressValue}%`;
+                if (sidebarProgress) sidebarProgress.textContent = `${Math.round(progressValue)}%`;
+            });
+        }
+
+        loadPlan();
+    </script>
+</body>
+</html>
