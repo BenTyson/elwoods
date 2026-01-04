@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Woods | Business Plan</title>
+    <meta name="description" content="El Woods - A sustainable retail and cafe experience in Wheat Ridge, Colorado">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -15,7 +16,7 @@
                 extend: {
                     colors: {
                         forest: {
-                            950: '#0f1a0f',
+                            950: '#0a140a',
                             900: '#1a2e1a',
                             800: '#2d4a3e',
                             700: '#3d6b4f',
@@ -25,6 +26,7 @@
                             300: '#a3c9ad',
                             200: '#c8dece',
                             100: '#e8f0ea',
+                            50: '#f4f8f5',
                         },
                         gold: {
                             600: '#a68a3a',
@@ -40,8 +42,8 @@
                         }
                     },
                     fontFamily: {
-                        'display': ['"Cormorant Garamond"', 'serif'],
-                        'body': ['Lato', 'sans-serif'],
+                        'display': ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        'body': ['Lato', 'system-ui', 'sans-serif'],
                     },
                 }
             }
@@ -49,16 +51,44 @@
     </script>
 
     <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
-    <!-- Custom styles for content HTML (from JSON) -->
     <style>
-        /* Smooth scrolling */
+        /* ============================================
+           BASE & SMOOTH SCROLLING
+           ============================================ */
         html {
             scroll-behavior: smooth;
         }
 
-        /* Custom scrollbar for sidebar */
+        body {
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: rgba(90, 146, 104, 0.3);
+            color: #1a2e1a;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f4f8f5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #5a9268 0%, #3d6b4f 100%);
+            border-radius: 5px;
+            border: 2px solid #f4f8f5;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #4a7c59 0%, #2d4a3e 100%);
+        }
+
+        /* Sidebar scrollbar */
         #sidebarNav::-webkit-scrollbar {
             width: 4px;
         }
@@ -69,25 +99,40 @@
             background: rgba(90, 146, 104, 0.3);
             border-radius: 4px;
         }
-        #sidebarNav::-webkit-scrollbar-thumb:hover {
-            background: rgba(90, 146, 104, 0.5);
+
+        /* ============================================
+           HERO ANIMATIONS
+           ============================================ */
+        @keyframes glow-pulse {
+            0%, 100% {
+                filter: drop-shadow(0 0 20px rgba(201, 169, 89, 0.4));
+                transform: scale(1);
+            }
+            50% {
+                filter: drop-shadow(0 0 40px rgba(201, 169, 89, 0.7));
+                transform: scale(1.02);
+            }
         }
 
-        /* Hero animations */
-        @keyframes glow-pulse {
-            0%, 100% { filter: drop-shadow(0 0 20px rgba(90, 146, 104, 0.3)); }
-            50% { filter: drop-shadow(0 0 40px rgba(90, 146, 104, 0.6)); }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes float-reverse {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(-5deg); }
         }
 
         @keyframes bob {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(8px); }
+            50% { transform: translateY(10px); }
         }
 
         @keyframes fade-in-up {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(40px);
             }
             to {
                 opacity: 1;
@@ -95,8 +140,42 @@
             }
         }
 
+        @keyframes fade-in-scale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        @keyframes leaf-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg) translateX(0);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% {
+                transform: translateY(100vh) rotate(720deg) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
         .hero-logo {
-            animation: glow-pulse 4s ease-in-out infinite;
+            animation: glow-pulse 4s ease-in-out infinite, fade-in-scale 1.2s ease-out;
         }
 
         .scroll-indicator {
@@ -108,20 +187,33 @@
         }
 
         .fade-in-up-delay-1 {
-            animation: fade-in-up 1s ease-out 0.3s forwards;
+            animation: fade-in-up 1s ease-out 0.4s forwards;
             opacity: 0;
         }
 
         .fade-in-up-delay-2 {
-            animation: fade-in-up 1s ease-out 0.6s forwards;
+            animation: fade-in-up 1s ease-out 0.8s forwards;
             opacity: 0;
         }
 
-        /* Scroll reveal for sections */
+        /* Floating leaves */
+        .leaf {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0;
+            animation: leaf-fall linear infinite;
+            pointer-events: none;
+            color: rgba(90, 146, 104, 0.6);
+        }
+
+        /* ============================================
+           SCROLL REVEAL ANIMATIONS
+           ============================================ */
         .reveal {
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .reveal.visible {
@@ -129,71 +221,114 @@
             transform: translateY(0);
         }
 
-        /* Card hover effects */
-        .card-hover {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        /* Staggered reveals */
+        .reveal-stagger-1 { transition-delay: 0.1s; }
+        .reveal-stagger-2 { transition-delay: 0.2s; }
+        .reveal-stagger-3 { transition-delay: 0.3s; }
+
+        /* ============================================
+           CARD EFFECTS
+           ============================================ */
+        .card-premium {
+            position: relative;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .card-hover:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        .card-premium::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 18px;
+            background: linear-gradient(135deg,
+                rgba(90, 146, 104, 0.5) 0%,
+                rgba(201, 169, 89, 0.5) 50%,
+                rgba(90, 146, 104, 0.5) 100%);
+            background-size: 200% 200%;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.4s ease;
         }
 
-        /* Sticky nav */
+        .card-premium:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(26, 46, 26, 0.25);
+        }
+
+        .card-premium:hover::before {
+            opacity: 1;
+            animation: gradient-shift 3s ease infinite;
+        }
+
+        /* ============================================
+           STICKY NAV
+           ============================================ */
         .sticky-nav {
             transform: translateY(-100%);
-            transition: transform 0.3s ease, opacity 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .sticky-nav.visible {
             transform: translateY(0);
         }
 
-        /* TOC item hover */
+        /* ============================================
+           TOC & SIDEBAR
+           ============================================ */
         .toc-item {
-            transition: transform 0.2s ease, color 0.2s ease;
+            transition: transform 0.2s ease, color 0.2s ease, background 0.2s ease;
         }
 
         .toc-item:hover {
-            transform: translateX(4px);
+            transform: translateX(6px);
         }
 
-        /* Reduced motion support */
-        @media (prefers-reduced-motion: reduce) {
-            .hero-logo,
-            .scroll-indicator,
-            .fade-in-up,
-            .fade-in-up-delay-1,
-            .fade-in-up-delay-2 {
-                animation: none;
-                opacity: 1;
-                transform: none;
-            }
-            .reveal {
-                opacity: 1;
-                transform: none;
-                transition: none;
-            }
-            .card-hover:hover {
-                transform: none;
-            }
+        .sidebar-link {
+            position: relative;
+            overflow: hidden;
         }
 
-        /* ===========================================
-           CONTENT TYPOGRAPHY & SPACING
-           Proper CSS - no @apply (CDN doesn't support it)
-           =========================================== */
+        .sidebar-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(180deg, #5a9268, #c9a959);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+            border-radius: 0 2px 2px 0;
+        }
 
-        /* Paragraphs */
+        .sidebar-link.active::after {
+            transform: scaleY(1);
+        }
+
+        /* ============================================
+           CONTENT TYPOGRAPHY
+           ============================================ */
         .section-content p {
             margin-bottom: 1.5rem;
-            line-height: 1.8;
+            line-height: 1.85;
             font-size: 1.05rem;
             color: #4b5563;
         }
 
         .section-content p:last-child {
             margin-bottom: 0;
+        }
+
+        /* Drop cap for first paragraph */
+        .section-content > p:first-child::first-letter {
+            float: left;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            line-height: 0.8;
+            padding-right: 0.75rem;
+            padding-top: 0.25rem;
+            color: #3d6b4f;
+            font-weight: 600;
         }
 
         /* Headings */
@@ -205,7 +340,9 @@
             margin-top: 3rem;
             margin-bottom: 1.25rem;
             padding-bottom: 0.75rem;
-            border-bottom: 2px solid #e8e4d9;
+            border-bottom: 2px solid transparent;
+            border-image: linear-gradient(90deg, #c9a959, transparent) 1;
+            position: relative;
         }
 
         .section-content h3:first-child,
@@ -232,9 +369,9 @@
 
         .section-content li {
             position: relative;
-            padding-left: 1.75rem;
+            padding-left: 2rem;
             margin-bottom: 0.875rem;
-            line-height: 1.7;
+            line-height: 1.75;
             font-size: 1.05rem;
             color: #4b5563;
         }
@@ -243,11 +380,12 @@
             content: '';
             position: absolute;
             left: 0;
-            top: 0.6rem;
-            width: 8px;
-            height: 8px;
+            top: 0.55rem;
+            width: 10px;
+            height: 10px;
             background: linear-gradient(135deg, #5a9268 0%, #c9a959 100%);
             border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(90, 146, 104, 0.3);
         }
 
         .section-content ol {
@@ -262,56 +400,59 @@
             content: counter(list-counter);
             position: absolute;
             left: 0;
-            top: 0;
+            top: -0.1rem;
             font-family: 'Cormorant Garamond', serif;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1.25rem;
             color: #c9a959;
         }
 
         /* Bold text */
         .section-content strong {
             color: #1f2937;
-            font-weight: 600;
+            font-weight: 700;
         }
 
-        /* Blockquotes - Pull quotes that break out */
+        /* Blockquotes */
         .section-content blockquote {
             position: relative;
-            margin: 3rem 0;
+            margin: 3.5rem 0;
             margin-left: -2rem;
             margin-right: -2rem;
-            padding: 2.5rem 3rem;
-            background: linear-gradient(135deg, #1a2e1a 0%, #2d4a3e 100%);
-            border-radius: 16px;
+            padding: 3rem 3.5rem;
+            background: linear-gradient(135deg, #0a140a 0%, #1a2e1a 50%, #2d4a3e 100%);
+            border-radius: 20px;
             border: none;
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.75rem;
             font-style: italic;
             font-weight: 500;
             color: #faf9f6;
-            line-height: 1.4;
+            line-height: 1.5;
             text-align: center;
-            box-shadow: 0 20px 60px rgba(26, 46, 26, 0.3);
+            box-shadow:
+                0 25px 60px rgba(10, 20, 10, 0.4),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+            overflow: hidden;
         }
 
         @media (min-width: 768px) {
             .section-content blockquote {
                 margin-left: -3rem;
                 margin-right: -3rem;
-                padding: 3rem 4rem;
-                font-size: 2rem;
+                padding: 3.5rem 5rem;
+                font-size: 2.25rem;
             }
         }
 
         .section-content blockquote::before {
             content: '"';
             position: absolute;
-            top: 1rem;
+            top: 0.5rem;
             left: 1.5rem;
-            font-size: 5rem;
+            font-size: 6rem;
             color: #c9a959;
-            opacity: 0.2;
+            opacity: 0.15;
             font-family: 'Cormorant Garamond', serif;
             line-height: 1;
         }
@@ -319,12 +460,12 @@
         .section-content blockquote::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: 1.5rem;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
+            width: 80px;
             height: 3px;
-            background: linear-gradient(90deg, #c9a959, #d4b86a);
+            background: linear-gradient(90deg, transparent, #c9a959, transparent);
             border-radius: 2px;
         }
 
@@ -335,13 +476,16 @@
             border-collapse: collapse;
             font-size: 0.95rem;
             background: #fff;
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            box-shadow:
+                0 4px 15px rgba(0,0,0,0.08),
+                0 1px 3px rgba(0,0,0,0.05);
         }
 
         .section-content tr {
             border-bottom: 1px solid #e8e4d9;
+            transition: background 0.2s ease;
         }
 
         .section-content tr:last-child {
@@ -349,7 +493,7 @@
         }
 
         .section-content tr:first-child {
-            background: linear-gradient(135deg, #1a2e1a 0%, #2d4a3e 100%);
+            background: linear-gradient(135deg, #0a140a 0%, #1a2e1a 50%, #2d4a3e 100%);
             color: #faf9f6;
         }
 
@@ -360,48 +504,63 @@
 
         .section-content tr:first-child td {
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em;
+            padding: 1.1rem 1.25rem;
         }
 
         .section-content tr:not(:first-child):hover {
-            background: #faf9f6;
+            background: linear-gradient(90deg, rgba(90, 146, 104, 0.05), transparent);
         }
 
-        /* ===========================================
-           DATA CARDS - Key metrics that break out
-           =========================================== */
-
+        /* ============================================
+           DATA CARDS
+           ============================================ */
         .section-content .data-grid {
             display: grid;
             grid-template-columns: repeat(1, 1fr);
             gap: 1.25rem;
-            margin: 2.5rem -1rem;
-            padding: 2rem 1rem;
-            background: linear-gradient(135deg, rgba(90, 146, 104, 0.05) 0%, rgba(201, 169, 89, 0.05) 100%);
-            border-radius: 20px;
+            margin: 3rem -1rem;
+            padding: 2.5rem 1.5rem;
+            background: linear-gradient(135deg,
+                rgba(90, 146, 104, 0.08) 0%,
+                rgba(201, 169, 89, 0.08) 50%,
+                rgba(90, 146, 104, 0.05) 100%);
+            border-radius: 24px;
+            position: relative;
+        }
+
+        .section-content .data-grid::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            border: 1px solid rgba(90, 146, 104, 0.15);
+            pointer-events: none;
         }
 
         @media (min-width: 768px) {
             .section-content .data-grid {
                 grid-template-columns: repeat(3, 1fr);
                 margin: 3rem -2rem;
-                padding: 2.5rem 2rem;
-                gap: 1.5rem;
+                padding: 3rem 2.5rem;
+                gap: 1.75rem;
             }
         }
 
         .section-content .data-card {
             position: relative;
-            padding: 1.75rem 1.25rem;
+            padding: 2rem 1.5rem;
             text-align: center;
             background: white;
             border: none;
             border-radius: 16px;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            box-shadow:
+                0 4px 20px rgba(0, 0, 0, 0.06),
+                0 1px 3px rgba(0, 0, 0, 0.04);
         }
 
         .section-content .data-card::before {
@@ -410,39 +569,51 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #5a9268 0%, #c9a959 100%);
+            height: 4px;
+            background: linear-gradient(90deg, #5a9268 0%, #c9a959 50%, #5a9268 100%);
+            background-size: 200% 100%;
+            transition: background-position 0.5s ease;
         }
 
         .section-content .data-card:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 16px 40px rgba(61, 107, 79, 0.18);
+            transform: translateY(-6px) scale(1.02);
+            box-shadow:
+                0 20px 40px rgba(61, 107, 79, 0.2),
+                0 8px 16px rgba(61, 107, 79, 0.1);
+        }
+
+        .section-content .data-card:hover::before {
+            background-position: 100% 0;
         }
 
         .section-content .data-card h4 {
-            margin: 0 0 0.5rem 0;
+            margin: 0 0 0.75rem 0;
             padding: 0;
             border: none;
             font-family: 'Lato', sans-serif;
             font-size: 0.7rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.12em;
+            letter-spacing: 0.14em;
             color: #4a7c59;
         }
 
         .section-content .data-card .value {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
+            font-size: 2.75rem;
             font-weight: 700;
             color: #1a2e1a;
             line-height: 1.1;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.35rem;
+            background: linear-gradient(135deg, #1a2e1a 0%, #3d6b4f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         @media (min-width: 768px) {
             .section-content .data-card .value {
-                font-size: 3rem;
+                font-size: 3.25rem;
             }
         }
 
@@ -452,137 +623,228 @@
             line-height: 1.4;
         }
 
-        /* ===========================================
-           HIGHLIGHT BOX - For key insights
-           =========================================== */
-        .section-content .highlight-box,
-        .section-content > ul:first-of-type {
-            background: linear-gradient(135deg, #faf9f6 0%, #e8f0ea 100%);
-            border-left: 4px solid #c9a959;
-            border-radius: 0 12px 12px 0;
-            padding: 1.5rem 1.5rem 1.5rem 2rem;
-            margin: 2rem 0;
+        /* ============================================
+           SCROLL TO TOP BUTTON
+           ============================================ */
+        #scrollToTop {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3d6b4f 0%, #2d4a3e 100%);
+            color: white;
+            border: none;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(26, 46, 26, 0.3);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #scrollToTop.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        #scrollToTop:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(26, 46, 26, 0.4);
+            background: linear-gradient(135deg, #4a7c59 0%, #3d6b4f 100%);
+        }
+
+        /* ============================================
+           LOADING STATE
+           ============================================ */
+        .loading-skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 8px;
+        }
+
+        /* ============================================
+           REDUCED MOTION
+           ============================================ */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        /* ============================================
+           PRINT STYLES
+           ============================================ */
+        @media print {
+            .sticky-nav, #scrollToTop, .scroll-indicator, #sidebarNav {
+                display: none !important;
+            }
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+            .card-premium::before {
+                display: none;
+            }
         }
     </style>
 </head>
-<body class="font-body text-gray-700 bg-gradient-to-br from-slate-50 via-emerald-50/30 to-slate-100 min-h-screen">
-    <!-- Organic background shapes -->
+<body class="font-body text-gray-700 bg-forest-50 min-h-screen">
+    <!-- Animated organic background -->
     <div class="fixed inset-0 pointer-events-none overflow-hidden -z-10">
-        <!-- Large gradient blob top right -->
-        <div class="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-emerald-100/40 to-teal-50/20 blur-3xl"></div>
-        <!-- Medium blob left -->
-        <div class="absolute top-1/3 -left-20 w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-amber-100/30 to-yellow-50/20 blur-3xl"></div>
-        <!-- Small accent blob -->
-        <div class="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] rounded-full bg-gradient-to-bl from-emerald-100/30 to-cyan-50/20 blur-3xl"></div>
-        <!-- Bottom gradient -->
-        <div class="absolute bottom-0 left-0 right-0 h-96 bg-gradient-to-t from-emerald-50/50 to-transparent"></div>
+        <div class="absolute -top-40 -right-40 w-[700px] h-[700px] rounded-full bg-gradient-to-br from-emerald-100/50 to-teal-50/30 blur-3xl animate-pulse" style="animation-duration: 8s;"></div>
+        <div class="absolute top-1/3 -left-32 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-amber-100/40 to-yellow-50/20 blur-3xl animate-pulse" style="animation-duration: 10s; animation-delay: 2s;"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-gradient-to-bl from-emerald-100/40 to-cyan-50/20 blur-3xl animate-pulse" style="animation-duration: 12s; animation-delay: 4s;"></div>
+        <div class="absolute bottom-0 left-0 right-0 h-[500px] bg-gradient-to-t from-forest-100/60 via-forest-50/30 to-transparent"></div>
     </div>
 
+    <!-- Floating leaves container -->
+    <div id="leavesContainer" class="fixed inset-0 pointer-events-none overflow-hidden z-0"></div>
+
     <!-- Sticky Navigation -->
-    <nav id="stickyNav" class="sticky-nav fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-cream-300/50 shadow-sm">
-        <div class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
-            <img src="public/TextLogo_Black.png" alt="El Woods" class="h-8 md:h-10">
-            <span id="currentSection" class="text-sm text-forest-700 font-medium hidden md:block"></span>
+    <nav id="stickyNav" class="sticky-nav fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-lg border-b border-forest-200/50 shadow-lg shadow-forest-900/5">
+        <div class="max-w-6xl mx-auto px-6 py-3.5 flex items-center justify-between">
+            <a href="#hero" class="flex items-center gap-3 group">
+                <img src="public/TextLogo_Black.png" alt="El Woods" class="h-8 md:h-10 transition-transform group-hover:scale-105">
+            </a>
+            <div class="flex items-center gap-4">
+                <span id="currentSection" class="text-sm text-forest-700 font-medium hidden md:block max-w-xs truncate"></span>
+                <span id="readingProgress" class="text-xs text-forest-500 font-semibold bg-forest-100 px-2.5 py-1 rounded-full hidden md:block">0%</span>
+            </div>
         </div>
         <!-- Progress bar -->
-        <div class="h-0.5 bg-cream-200">
-            <div id="progressBar" class="h-full bg-gradient-to-r from-forest-600 to-gold-500 transition-all duration-150" style="width: 0%"></div>
+        <div class="h-1 bg-forest-100">
+            <div id="progressBar" class="h-full bg-gradient-to-r from-forest-500 via-forest-400 to-gold-500 transition-all duration-150 shadow-sm shadow-forest-500/50" style="width: 0%"></div>
         </div>
     </nav>
 
     <!-- Hero -->
     <header id="hero" class="relative min-h-screen flex flex-col items-center justify-center text-cream-100 overflow-hidden">
-        <!-- Background image -->
-        <div class="absolute inset-0">
+        <!-- Parallax background -->
+        <div class="absolute inset-0 hero-parallax">
             <img
                 src="public/ElWoods_ForestBanner2.jpg"
                 alt=""
-                class="w-full h-full object-cover"
-                style="object-position: center 40%;"
+                class="w-full h-[120%] object-cover"
+                style="object-position: center 30%;"
+                loading="eager"
             >
-            <!-- Dark gradient overlay -->
-            <div class="absolute inset-0 bg-gradient-to-b from-forest-950/70 via-forest-950/50 to-forest-950/80"></div>
+            <!-- Multi-layer gradient overlay -->
+            <div class="absolute inset-0 bg-gradient-to-b from-forest-950/80 via-forest-950/50 to-forest-950/90"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-forest-950/30 via-transparent to-forest-950/30"></div>
         </div>
+
+        <!-- Decorative elements -->
+        <div class="absolute top-20 left-10 w-32 h-32 border border-gold-500/20 rounded-full animate-pulse" style="animation-duration: 4s;"></div>
+        <div class="absolute bottom-40 right-20 w-24 h-24 border border-forest-400/20 rounded-full animate-pulse" style="animation-duration: 6s;"></div>
 
         <!-- Content -->
         <div class="relative z-10 text-center px-6 py-12">
             <!-- Stamp Logo -->
-            <div class="fade-in-up mb-8">
+            <div class="fade-in-up mb-10">
                 <img
                     src="public/ElWoods_Stamp.png"
                     alt="El Woods Revival"
-                    class="hero-logo w-48 h-48 md:w-64 md:h-64 mx-auto"
+                    class="hero-logo w-52 h-52 md:w-72 md:h-72 mx-auto"
                 >
             </div>
 
             <!-- Tagline -->
-            <p class="fade-in-up-delay-1 font-display text-2xl md:text-4xl italic text-gold-400 mb-4 max-w-2xl mx-auto">
+            <p class="fade-in-up-delay-1 font-display text-3xl md:text-5xl italic text-gold-400 mb-6 max-w-2xl mx-auto leading-tight">
                 "Fuck normal, I want magic."
             </p>
 
             <!-- Subtitle -->
-            <p class="fade-in-up-delay-2 text-lg md:text-xl font-light opacity-90 max-w-xl mx-auto text-cream-200">
-                A sustainable retail and cafe experience in West Denver
+            <p class="fade-in-up-delay-2 text-lg md:text-xl font-light opacity-90 max-w-xl mx-auto text-cream-200 tracking-wide">
+                A sustainable retail and cafe experience in Wheat Ridge
             </p>
+
+            <!-- Decorative line -->
+            <div class="fade-in-up-delay-2 mt-10 flex items-center justify-center gap-4">
+                <div class="w-16 h-px bg-gradient-to-r from-transparent to-gold-500/50"></div>
+                <div class="w-2 h-2 rounded-full bg-gold-500/50"></div>
+                <div class="w-16 h-px bg-gradient-to-l from-transparent to-gold-500/50"></div>
+            </div>
         </div>
 
         <!-- Scroll indicator -->
-        <a href="#toc" class="scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 text-cream-200/80 hover:text-cream-100 transition-colors">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-            </svg>
-            <span class="sr-only">Scroll to contents</span>
+        <a href="#toc" class="scroll-indicator absolute bottom-10 left-1/2 -translate-x-1/2 text-cream-200/80 hover:text-gold-400 transition-colors group">
+            <div class="flex flex-col items-center gap-2">
+                <span class="text-xs uppercase tracking-widest opacity-60 group-hover:opacity-100 transition-opacity">Explore</span>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
         </a>
     </header>
 
-    <!-- Main Layout: Sidebar + Content -->
+    <!-- Main Layout -->
     <div class="max-w-[1400px] mx-auto px-4 lg:px-8">
-        <div class="lg:flex lg:gap-8">
+        <div class="lg:flex lg:gap-10">
 
-            <!-- Sticky Sidebar Navigation -->
+            <!-- Sticky Sidebar -->
             <aside class="hidden lg:block lg:w-72 flex-shrink-0">
-                <div id="sidebarNav" class="sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto">
+                <div id="sidebarNav" class="sticky top-28 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2">
                     <!-- Sidebar Header -->
-                    <div class="mb-6">
-                        <img src="public/TextLogo_Black.png" alt="El Woods" class="h-8 mb-4 opacity-80">
-                        <div class="text-xs uppercase tracking-widest text-forest-600 font-semibold">Business Plan</div>
+                    <div class="mb-8">
+                        <div class="text-xs uppercase tracking-[0.2em] text-forest-600 font-bold mb-2">Business Plan</div>
+                        <div class="h-0.5 w-12 bg-gradient-to-r from-forest-500 to-gold-500 rounded-full"></div>
                     </div>
 
-                    <!-- Progress indicator -->
-                    <div class="mb-6 p-4 bg-white/60 backdrop-blur rounded-xl border border-white/80 shadow-sm">
-                        <div class="flex items-center justify-between text-sm mb-2">
-                            <span class="text-gray-500">Progress</span>
-                            <span id="sidebarProgress" class="font-semibold text-forest-700">0%</span>
+                    <!-- Progress Card -->
+                    <div class="mb-8 p-5 bg-white/80 backdrop-blur-sm rounded-2xl border border-forest-200/50 shadow-lg shadow-forest-900/5">
+                        <div class="flex items-center justify-between text-sm mb-3">
+                            <span class="text-gray-500 font-medium">Reading Progress</span>
+                            <span id="sidebarProgress" class="font-bold text-forest-700 text-lg">0%</span>
                         </div>
-                        <div class="h-1.5 bg-gray-200 rounded-full overflow-hidden">
-                            <div id="sidebarProgressBar" class="h-full bg-gradient-to-r from-forest-500 to-gold-500 transition-all duration-300" style="width: 0%"></div>
+                        <div class="h-2 bg-forest-100 rounded-full overflow-hidden">
+                            <div id="sidebarProgressBar" class="h-full bg-gradient-to-r from-forest-500 to-gold-500 transition-all duration-300 rounded-full" style="width: 0%"></div>
                         </div>
+                        <div class="mt-3 text-xs text-gray-400" id="readingTime">Estimated reading: calculating...</div>
                     </div>
 
                     <!-- Section Links -->
-                    <nav class="space-y-1" id="sidebarTocList">
-                        <!-- Populated by JavaScript -->
-                    </nav>
+                    <nav class="space-y-1" id="sidebarTocList"></nav>
                 </div>
             </aside>
 
-            <!-- Main Content Area -->
+            <!-- Main Content -->
             <main class="flex-1 min-w-0">
-                <!-- Mobile TOC Card (hidden on desktop) -->
-                <nav id="toc" class="lg:hidden bg-white/80 backdrop-blur rounded-2xl shadow-xl overflow-hidden -mt-16 relative z-20 mb-12 border border-white/50">
-                    <div class="bg-gradient-to-r from-forest-800 to-forest-700 px-6 py-6">
-                        <h2 class="font-display text-2xl text-white font-semibold">Contents</h2>
+                <!-- Mobile TOC -->
+                <nav id="toc" class="lg:hidden bg-white/90 backdrop-blur-lg rounded-3xl shadow-2xl shadow-forest-900/10 overflow-hidden -mt-20 relative z-20 mb-12 border border-forest-200/50">
+                    <div class="bg-gradient-to-r from-forest-900 via-forest-800 to-forest-900 px-6 py-7">
+                        <h2 class="font-display text-2xl text-white font-semibold tracking-wide">Contents</h2>
+                        <p class="text-forest-300 text-sm mt-1">14 sections</p>
                     </div>
                     <div class="p-6">
-                        <ol class="grid grid-cols-1 gap-y-1" id="tocList">
-                            <!-- Populated by JavaScript -->
-                        </ol>
+                        <ol class="grid grid-cols-1 gap-y-1" id="tocList"></ol>
                     </div>
                 </nav>
 
-                <!-- Sections -->
-                <div id="sectionsContainer" class="space-y-10 lg:-mt-16">
-                    <!-- Populated by JavaScript -->
+                <!-- Sections Container -->
+                <div id="sectionsContainer" class="space-y-8 lg:-mt-20">
+                    <!-- Loading state -->
+                    <div class="loading-placeholder space-y-8">
+                        <div class="bg-white rounded-2xl p-8">
+                            <div class="loading-skeleton h-8 w-48 mb-6"></div>
+                            <div class="loading-skeleton h-4 w-full mb-3"></div>
+                            <div class="loading-skeleton h-4 w-5/6 mb-3"></div>
+                            <div class="loading-skeleton h-4 w-4/6"></div>
+                        </div>
+                    </div>
                 </div>
             </main>
 
@@ -590,144 +852,158 @@
     </div>
 
     <!-- Footer -->
-    <footer class="relative text-cream-100 py-20 px-6 mt-16 overflow-hidden">
-        <!-- Background image -->
+    <footer class="relative text-cream-100 py-24 px-6 mt-20 overflow-hidden">
         <div class="absolute inset-0">
-            <img
-                src="public/ElWoods_ForestBanner2.jpg"
-                alt=""
-                class="w-full h-full object-cover"
-                style="object-position: center 60%;"
-            >
-            <div class="absolute inset-0 bg-forest-950/85"></div>
+            <img src="public/ElWoods_ForestBanner2.jpg" alt="" class="w-full h-full object-cover" style="object-position: center 70%;">
+            <div class="absolute inset-0 bg-gradient-to-b from-forest-950/90 via-forest-950/85 to-forest-950/95"></div>
         </div>
 
-        <!-- Watermark stamp -->
-        <img
-            src="public/ElWoods_Stamp.png"
-            alt=""
-            class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 opacity-[0.08] pointer-events-none"
-        >
+        <!-- Watermark -->
+        <img src="public/ElWoods_Stamp.png" alt="" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] opacity-[0.04] pointer-events-none">
 
         <div class="relative z-10 max-w-4xl mx-auto text-center">
-            <img src="public/ElwoodsRev_White_75op.png" alt="El Woods Revival" class="h-12 md:h-16 mx-auto mb-8 opacity-90">
+            <img src="public/ElwoodsRev_White_75op.png" alt="El Woods Revival" class="h-14 md:h-20 mx-auto mb-10 opacity-90">
 
-            <div class="space-y-3 text-sm">
+            <div class="space-y-4 text-sm">
                 <p class="text-cream-200">
                     <span class="font-semibold text-cream-100">Morgan McIntosh</span>
-                    <span class="mx-2 text-forest-400">|</span>
+                    <span class="mx-3 text-forest-500">•</span>
                     720.254.9067
-                    <span class="mx-2 text-forest-400">|</span>
+                    <span class="mx-3 text-forest-500">•</span>
                     elwoods.revival@gmail.com
                 </p>
                 <p class="text-cream-200">
                     <span class="font-semibold text-cream-100">Benjamin Tyson</span>
-                    <span class="mx-2 text-forest-400">|</span>
+                    <span class="mx-3 text-forest-500">•</span>
                     720.839.5990
-                    <span class="mx-2 text-forest-400">|</span>
+                    <span class="mx-3 text-forest-500">•</span>
                     ben@hgraphene.com
                 </p>
-                <p class="pt-4">
-                    <a href="https://instagram.com/elwoods.revival" target="_blank" class="inline-flex items-center gap-2 text-gold-400 hover:text-gold-300 transition-colors">
+                <p class="pt-6">
+                    <a href="https://instagram.com/elwoods.revival" target="_blank" class="inline-flex items-center gap-2 text-gold-400 hover:text-gold-300 transition-all hover:gap-3">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                         @elwoods.revival
                     </a>
                 </p>
             </div>
 
-            <div class="mt-10 pt-6 border-t border-cream-100/20 text-xs text-cream-300/60" id="generatedDate"></div>
+            <div class="mt-12 pt-8 border-t border-cream-100/10 text-xs text-cream-300/50" id="generatedDate"></div>
         </div>
     </footer>
 
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" aria-label="Scroll to top">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+
     <script>
-        // Forest divider HTML template
+        // ============================================
+        // FLOATING LEAVES
+        // ============================================
+        function createLeaves() {
+            const container = document.getElementById('leavesContainer');
+            const leafSymbols = ['🍃', '🌿', '☘️', '🌱'];
+            const leafCount = 8;
+
+            for (let i = 0; i < leafCount; i++) {
+                const leaf = document.createElement('div');
+                leaf.className = 'leaf';
+                leaf.textContent = leafSymbols[Math.floor(Math.random() * leafSymbols.length)];
+                leaf.style.left = Math.random() * 100 + '%';
+                leaf.style.animationDuration = (15 + Math.random() * 20) + 's';
+                leaf.style.animationDelay = Math.random() * 20 + 's';
+                leaf.style.fontSize = (1 + Math.random() * 1) + 'rem';
+                container.appendChild(leaf);
+            }
+        }
+
+        // ============================================
+        // DIVIDERS
+        // ============================================
         const forestDivider = `
-            <div class="relative h-40 md:h-56 my-16 rounded-2xl overflow-hidden shadow-lg">
-                <img
-                    src="public/ElWoods_ForestBanner2.jpg"
-                    alt=""
-                    class="w-full h-full object-cover"
-                    style="object-position: center 50%;"
-                >
-                <div class="absolute inset-0 bg-gradient-to-r from-forest-950/50 via-forest-950/20 to-forest-950/50"></div>
+            <div class="reveal relative h-44 md:h-60 my-16 rounded-3xl overflow-hidden shadow-2xl shadow-forest-900/20">
+                <img src="public/ElWoods_ForestBanner2.jpg" alt="" class="w-full h-full object-cover" style="object-position: center 50%;">
+                <div class="absolute inset-0 bg-gradient-to-r from-forest-950/60 via-forest-950/30 to-forest-950/60"></div>
                 <div class="absolute inset-0 flex items-center justify-center">
-                    <img src="public/ElWoods_Stamp.png" alt="" class="w-20 h-20 md:w-28 md:h-28 opacity-30">
+                    <img src="public/ElWoods_Stamp.png" alt="" class="w-24 h-24 md:w-32 md:h-32 opacity-25">
                 </div>
             </div>
         `;
 
-        // Tagline divider (used once)
         const taglineDivider = `
-            <div class="relative h-28 md:h-36 my-16 rounded-2xl overflow-hidden shadow-lg">
-                <img
-                    src="public/FN_banner.jpg"
-                    alt="Fuck normal. I want magic."
-                    class="w-full h-full object-cover object-center"
-                >
+            <div class="reveal relative h-32 md:h-40 my-16 rounded-3xl overflow-hidden shadow-2xl shadow-forest-900/20">
+                <img src="public/FN_banner.jpg" alt="Fuck normal. I want magic." class="w-full h-full object-cover object-center">
             </div>
         `;
 
+        // ============================================
+        // LOAD & RENDER PLAN
+        // ============================================
         async function loadPlan() {
             try {
                 const response = await fetch('data/business-plan.json');
                 const plan = await response.json();
                 renderPlan(plan);
                 initScrollEffects();
+                initAnimatedCounters();
+                createLeaves();
+
+                // Calculate reading time
+                const text = plan.sections.map(s => s.content).join(' ');
+                const wordCount = text.replace(/<[^>]*>/g, '').split(/\s+/).length;
+                const readingTime = Math.ceil(wordCount / 200);
+                document.getElementById('readingTime').textContent = `~${readingTime} min read`;
             } catch (error) {
                 console.error('Error loading plan:', error);
                 document.getElementById('sectionsContainer').innerHTML =
-                    '<p class="text-center py-16 text-gray-500">Error loading business plan.</p>';
+                    '<div class="text-center py-20 text-gray-500"><p class="text-lg">Error loading business plan.</p><p class="text-sm mt-2">Please refresh the page.</p></div>';
             }
         }
 
         function renderPlan(plan) {
-            // Render Mobile Table of Contents
+            // Mobile TOC
             const tocList = document.getElementById('tocList');
             if (tocList) {
                 tocList.innerHTML = plan.sections.map((section, index) => `
                     <li>
-                        <a href="#section-${section.id}"
-                           class="toc-item group flex items-center gap-4 px-4 py-3 -mx-4 rounded-lg text-gray-600 hover:bg-forest-50 hover:text-forest-800 transition-all">
-                            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-forest-100 group-hover:bg-forest-200 flex items-center justify-center text-forest-700 font-bold text-sm transition-colors">${index + 1}</span>
+                        <a href="#section-${section.id}" class="toc-item group flex items-center gap-4 px-4 py-3.5 -mx-4 rounded-xl text-gray-600 hover:bg-forest-50 hover:text-forest-800 transition-all">
+                            <span class="flex-shrink-0 w-9 h-9 rounded-xl bg-forest-100 group-hover:bg-forest-500 group-hover:text-white flex items-center justify-center text-forest-700 font-bold text-sm transition-all">${index + 1}</span>
                             <span class="font-medium">${section.title}</span>
                         </a>
                     </li>
                 `).join('');
             }
 
-            // Render Sidebar Table of Contents
+            // Sidebar TOC
             const sidebarTocList = document.getElementById('sidebarTocList');
             if (sidebarTocList) {
                 sidebarTocList.innerHTML = plan.sections.map((section, index) => `
-                    <a href="#section-${section.id}"
-                       data-section-id="${section.id}"
-                       class="sidebar-link group flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-500 hover:bg-white/60 hover:text-forest-700 transition-all">
-                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-gray-100 group-hover:bg-forest-100 flex items-center justify-center text-gray-400 group-hover:text-forest-600 text-xs font-semibold transition-colors">${index + 1}</span>
-                        <span class="truncate">${section.title}</span>
+                    <a href="#section-${section.id}" data-section-id="${section.id}" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-gray-500 hover:bg-white/80 hover:text-forest-700 transition-all">
+                        <span class="flex-shrink-0 w-7 h-7 rounded-lg bg-gray-100 group-hover:bg-forest-500 group-hover:text-white flex items-center justify-center text-gray-400 text-xs font-bold transition-all">${index + 1}</span>
+                        <span class="truncate font-medium">${section.title}</span>
                     </a>
                 `).join('');
             }
 
-            // Render Sections with dividers
+            // Sections
             const container = document.getElementById('sectionsContainer');
-            let sectionsHTML = '';
+            let html = '';
 
             plan.sections.forEach((section, index) => {
-                // Add forest divider after sections 5, 10, 15
-                if (index === 5) {
-                    sectionsHTML += forestDivider;
-                } else if (index === 10) {
-                    sectionsHTML += taglineDivider;
-                } else if (index === 15) {
-                    sectionsHTML += forestDivider;
-                }
+                if (index === 5) html += forestDivider;
+                else if (index === 9) html += taglineDivider;
+                else if (index === 12) html += forestDivider;
 
-                sectionsHTML += `
-                    <article class="reveal card-hover bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden border border-white/50" id="section-${section.id}" data-section-title="${section.title}">
-                        <!-- Section header bar -->
-                        <div class="bg-gradient-to-r from-forest-800 via-forest-700 to-forest-800 px-6 md:px-10 py-5">
-                            <div class="flex items-center gap-4">
-                                <span class="flex-shrink-0 w-11 h-11 rounded-xl bg-white/15 backdrop-blur flex items-center justify-center text-gold-400 font-display text-lg font-bold shadow-inner">
+                html += `
+                    <article class="reveal card-premium bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-forest-900/10 overflow-hidden border border-forest-100" id="section-${section.id}" data-section-title="${section.title}">
+                        <div class="bg-gradient-to-r from-forest-900 via-forest-800 to-forest-900 px-6 md:px-10 py-6 relative overflow-hidden">
+                            <div class="absolute inset-0 opacity-10">
+                                <div class="absolute top-0 right-0 w-40 h-40 bg-gold-500 rounded-full blur-3xl"></div>
+                            </div>
+                            <div class="relative flex items-center gap-5">
+                                <span class="flex-shrink-0 w-12 h-12 rounded-xl bg-white/10 backdrop-blur flex items-center justify-center text-gold-400 font-display text-xl font-bold">
                                     ${String(index + 1).padStart(2, '0')}
                                 </span>
                                 <h2 class="font-display text-xl md:text-2xl text-white font-semibold tracking-wide">
@@ -735,112 +1011,196 @@
                                 </h2>
                             </div>
                         </div>
-                        <!-- Section content -->
-                        <div class="section-content px-6 md:px-10 py-8 md:py-10">
+                        <div class="section-content px-6 md:px-10 py-10 md:py-12">
                             ${section.content || '<p class="italic text-gray-400">Content coming soon.</p>'}
                         </div>
                     </article>
                 `;
             });
 
-            container.innerHTML = sectionsHTML;
+            container.innerHTML = html;
 
-            // Set generated date
+            // Generated date
             document.getElementById('generatedDate').textContent =
-                `Generated ${new Date().toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                })}`;
+                `Generated ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`;
         }
 
+        // ============================================
+        // SCROLL EFFECTS
+        // ============================================
         function initScrollEffects() {
             const hero = document.getElementById('hero');
             const stickyNav = document.getElementById('stickyNav');
             const progressBar = document.getElementById('progressBar');
             const sidebarProgressBar = document.getElementById('sidebarProgressBar');
             const sidebarProgress = document.getElementById('sidebarProgress');
+            const readingProgress = document.getElementById('readingProgress');
             const currentSectionEl = document.getElementById('currentSection');
             const sections = document.querySelectorAll('article[id^="section-"]');
             const revealElements = document.querySelectorAll('.reveal');
             const sidebarLinks = document.querySelectorAll('.sidebar-link');
+            const scrollToTop = document.getElementById('scrollToTop');
 
-            // Sticky nav visibility
-            const heroObserver = new IntersectionObserver(
-                (entries) => {
+            // Hero observer
+            new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    stickyNav.classList.toggle('visible', !entry.isIntersecting);
+                });
+            }, { threshold: 0 }).observe(hero);
+
+            // Reveal observer
+            new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.1, rootMargin: '-50px' }).observe(document.body);
+
+            revealElements.forEach(el => {
+                new IntersectionObserver(entries => {
                     entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            stickyNav.classList.remove('visible');
-                        } else {
-                            stickyNav.classList.add('visible');
-                        }
+                        if (entry.isIntersecting) entry.target.classList.add('visible');
                     });
-                },
-                { threshold: 0 }
-            );
-            heroObserver.observe(hero);
+                }, { threshold: 0.1, rootMargin: '-50px' }).observe(el);
+            });
 
-            // Scroll reveal for sections
-            const revealObserver = new IntersectionObserver(
-                (entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('visible');
-                        }
-                    });
-                },
-                { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-            );
-            revealElements.forEach(el => revealObserver.observe(el));
+            // Section tracking
+            new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const sectionId = entry.target.id.replace('section-', '');
+                        const title = entry.target.getAttribute('data-section-title');
 
-            // Current section tracking with sidebar highlight
-            const sectionObserver = new IntersectionObserver(
-                (entries) => {
+                        if (title && currentSectionEl) currentSectionEl.textContent = title;
+
+                        sidebarLinks.forEach(link => {
+                            const isActive = link.getAttribute('data-section-id') === sectionId;
+                            link.classList.toggle('active', isActive);
+                            link.classList.toggle('bg-white/90', isActive);
+                            link.classList.toggle('text-forest-800', isActive);
+                            link.classList.toggle('shadow-md', isActive);
+                            link.classList.toggle('text-gray-500', !isActive);
+
+                            const badge = link.querySelector('span:first-child');
+                            badge.classList.toggle('bg-forest-600', isActive);
+                            badge.classList.toggle('text-white', isActive);
+                            badge.classList.toggle('bg-gray-100', !isActive);
+                            badge.classList.toggle('text-gray-400', !isActive);
+                        });
+                    }
+                });
+            }, { threshold: 0.3, rootMargin: '-100px 0px -40% 0px' }).observe(document.body);
+
+            sections.forEach(section => {
+                new IntersectionObserver(entries => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             const sectionId = entry.target.id.replace('section-', '');
                             const title = entry.target.getAttribute('data-section-title');
 
-                            // Update top nav
-                            if (title && currentSectionEl) {
-                                currentSectionEl.textContent = title;
-                            }
+                            if (title && currentSectionEl) currentSectionEl.textContent = title;
 
-                            // Update sidebar highlighting
                             sidebarLinks.forEach(link => {
-                                const linkId = link.getAttribute('data-section-id');
-                                if (linkId === sectionId) {
-                                    link.classList.add('bg-white/80', 'text-forest-800', 'shadow-sm', 'font-medium');
-                                    link.classList.remove('text-gray-500');
-                                    link.querySelector('span:first-child').classList.add('bg-forest-500', 'text-white');
-                                    link.querySelector('span:first-child').classList.remove('bg-gray-100', 'text-gray-400');
-                                } else {
-                                    link.classList.remove('bg-white/80', 'text-forest-800', 'shadow-sm', 'font-medium');
-                                    link.classList.add('text-gray-500');
-                                    link.querySelector('span:first-child').classList.remove('bg-forest-500', 'text-white');
-                                    link.querySelector('span:first-child').classList.add('bg-gray-100', 'text-gray-400');
-                                }
+                                const isActive = link.getAttribute('data-section-id') === sectionId;
+                                link.classList.toggle('active', isActive);
+                                link.classList.toggle('bg-white/90', isActive);
+                                link.classList.toggle('text-forest-800', isActive);
+                                link.classList.toggle('shadow-md', isActive);
+                                link.classList.toggle('text-gray-500', !isActive);
+
+                                const badge = link.querySelector('span:first-child');
+                                badge.classList.toggle('bg-forest-600', isActive);
+                                badge.classList.toggle('text-white', isActive);
+                                badge.classList.toggle('bg-gray-100', !isActive);
+                                badge.classList.toggle('text-gray-400', !isActive);
                             });
                         }
                     });
-                },
-                { threshold: 0.3, rootMargin: '-100px 0px -50% 0px' }
-            );
-            sections.forEach(section => sectionObserver.observe(section));
+                }, { threshold: 0.3, rootMargin: '-100px 0px -40% 0px' }).observe(section);
+            });
 
-            // Progress bar (both top nav and sidebar)
+            // Progress & scroll to top
             window.addEventListener('scroll', () => {
                 const scrollTop = window.scrollY;
                 const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-                const progress = (scrollTop / docHeight) * 100;
-                const progressValue = Math.min(progress, 100);
+                const progress = Math.min((scrollTop / docHeight) * 100, 100);
 
-                if (progressBar) progressBar.style.width = `${progressValue}%`;
-                if (sidebarProgressBar) sidebarProgressBar.style.width = `${progressValue}%`;
-                if (sidebarProgress) sidebarProgress.textContent = `${Math.round(progressValue)}%`;
+                if (progressBar) progressBar.style.width = `${progress}%`;
+                if (sidebarProgressBar) sidebarProgressBar.style.width = `${progress}%`;
+                if (sidebarProgress) sidebarProgress.textContent = `${Math.round(progress)}%`;
+                if (readingProgress) readingProgress.textContent = `${Math.round(progress)}%`;
+
+                scrollToTop.classList.toggle('visible', scrollTop > 500);
+            });
+
+            scrollToTop.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Parallax hero
+            window.addEventListener('scroll', () => {
+                const scrolled = window.scrollY;
+                const heroImg = document.querySelector('.hero-parallax img');
+                if (heroImg && scrolled < window.innerHeight) {
+                    heroImg.style.transform = `translateY(${scrolled * 0.3}px)`;
+                }
             });
         }
 
+        // ============================================
+        // ANIMATED COUNTERS
+        // ============================================
+        function initAnimatedCounters() {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const valueEl = entry.target.querySelector('.value');
+                        if (valueEl && !valueEl.dataset.animated) {
+                            animateValue(valueEl);
+                            valueEl.dataset.animated = 'true';
+                        }
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            setTimeout(() => {
+                document.querySelectorAll('.data-card').forEach(card => observer.observe(card));
+            }, 500);
+        }
+
+        function animateValue(el) {
+            const text = el.textContent;
+            const match = text.match(/^(\$?)(\d+(?:,\d{3})*(?:\.\d+)?)(K?%?)/);
+            if (!match) return;
+
+            const [, prefix, numStr, suffix] = match;
+            const target = parseFloat(numStr.replace(/,/g, ''));
+            const duration = 1500;
+            const start = performance.now();
+
+            function update(now) {
+                const elapsed = now - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const current = target * eased;
+
+                let formatted;
+                if (target >= 1000) {
+                    formatted = current.toLocaleString('en-US', { maximumFractionDigits: 0 });
+                } else if (Number.isInteger(target)) {
+                    formatted = Math.round(current).toString();
+                } else {
+                    formatted = current.toFixed(1);
+                }
+
+                el.textContent = prefix + formatted + suffix;
+
+                if (progress < 1) requestAnimationFrame(update);
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        // Initialize
         loadPlan();
     </script>
 </body>
