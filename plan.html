@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Woods | Business Plan</title>
-    <meta name="description" content="El Woods - A sustainable retail and cafe experience in Wheat Ridge, Colorado">
+    <meta name="description" content="El Woods - A sustainable retail and eco-cafe experience in Wheat Ridge, Colorado">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -703,7 +703,7 @@
     <nav id="stickyNav" class="sticky-nav fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-lg border-b border-forest-200/50 shadow-lg shadow-forest-900/5">
         <div class="max-w-6xl mx-auto px-6 py-3.5 flex items-center justify-between">
             <a href="#hero" class="flex items-center gap-3 group">
-                <img src="public/TextLogo_Black.png" alt="El Woods" class="h-8 md:h-10 transition-transform group-hover:scale-105">
+                <span class="font-display text-xl font-semibold text-forest-800">El Woods</span>
             </a>
             <div class="flex items-center gap-4">
                 <span id="currentSection" class="text-sm text-forest-700 font-medium hidden md:block max-w-xs truncate"></span>
@@ -732,9 +732,6 @@
             <div class="absolute inset-0 bg-gradient-to-r from-forest-950/30 via-transparent to-forest-950/30"></div>
         </div>
 
-        <!-- Decorative elements -->
-        <div class="absolute top-20 left-10 w-32 h-32 border border-gold-500/20 rounded-full animate-pulse" style="animation-duration: 4s;"></div>
-        <div class="absolute bottom-40 right-20 w-24 h-24 border border-forest-400/20 rounded-full animate-pulse" style="animation-duration: 6s;"></div>
 
         <!-- Content -->
         <div class="relative z-10 text-center px-6 py-12">
@@ -749,12 +746,12 @@
 
             <!-- Tagline -->
             <p class="fade-in-up-delay-1 font-display text-3xl md:text-5xl italic text-gold-400 mb-6 max-w-2xl mx-auto leading-tight">
-                "Fuck normal, I want magic."
+                "Welcome to The Woods"
             </p>
 
             <!-- Subtitle -->
             <p class="fade-in-up-delay-2 text-lg md:text-xl font-light opacity-90 max-w-xl mx-auto text-cream-200 tracking-wide">
-                A sustainable retail and cafe experience in Wheat Ridge
+                A sustainable retail and eco-cafe experience in Wheat Ridge
             </p>
 
             <!-- Decorative line -->
@@ -1005,9 +1002,9 @@
 
             container.innerHTML = html;
 
-            // Generated date
+            // Footer credit
             document.getElementById('generatedDate').textContent =
-                `Generated ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`;
+                'Designed and Built by Ben Tyson & Morgan McIntosh';
         }
 
         // ============================================
