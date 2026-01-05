@@ -786,18 +786,6 @@
                         <div class="h-0.5 w-12 bg-gradient-to-r from-forest-500 to-gold-500 rounded-full"></div>
                     </div>
 
-                    <!-- Progress Card -->
-                    <div class="mb-8 p-5 bg-white/80 backdrop-blur-sm rounded-2xl border border-forest-200/50 shadow-lg shadow-forest-900/5">
-                        <div class="flex items-center justify-between text-sm mb-3">
-                            <span class="text-gray-500 font-medium">Reading Progress</span>
-                            <span id="sidebarProgress" class="font-bold text-forest-700 text-lg">0%</span>
-                        </div>
-                        <div class="h-2 bg-forest-100 rounded-full overflow-hidden">
-                            <div id="sidebarProgressBar" class="h-full bg-gradient-to-r from-forest-500 to-gold-500 transition-all duration-300 rounded-full" style="width: 0%"></div>
-                        </div>
-                        <div class="mt-3 text-xs text-gray-400" id="readingTime">Estimated reading: calculating...</div>
-                    </div>
-
                     <!-- Section Links -->
                     <nav class="space-y-1" id="sidebarTocList"></nav>
                 </div>
@@ -936,7 +924,8 @@
                 const text = plan.sections.map(s => s.content).join(' ');
                 const wordCount = text.replace(/<[^>]*>/g, '').split(/\s+/).length;
                 const readingTime = Math.ceil(wordCount / 200);
-                document.getElementById('readingTime').textContent = `~${readingTime} min read`;
+                const readingTimeEl = document.getElementById('readingTime');
+                if (readingTimeEl) readingTimeEl.textContent = `~${readingTime} min read`;
             } catch (error) {
                 console.error('Error loading plan:', error);
                 document.getElementById('sectionsContainer').innerHTML =
