@@ -708,6 +708,12 @@
             <div class="flex items-center gap-4">
                 <span id="currentSection" class="text-sm text-forest-700 font-medium hidden md:block max-w-xs truncate"></span>
                 <span id="readingProgress" class="text-xs text-forest-500 font-semibold bg-forest-100 px-2.5 py-1 rounded-full hidden md:block">0%</span>
+                <!-- Mobile hamburger menu -->
+                <button id="mobileMenuBtn" class="lg:hidden p-2 -mr-2 text-forest-700 hover:text-forest-900 transition-colors" aria-label="Open menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
             </div>
         </div>
         <!-- Progress bar -->
@@ -715,6 +721,28 @@
             <div id="progressBar" class="h-full bg-gradient-to-r from-forest-500 via-forest-400 to-gold-500 transition-all duration-150 shadow-sm shadow-forest-500/50" style="width: 0%"></div>
         </div>
     </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobileMenuOverlay" class="fixed inset-0 bg-forest-950/50 backdrop-blur-sm z-50 opacity-0 invisible transition-all duration-300">
+        <div id="mobileMenuPanel" class="absolute top-0 right-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl transform translate-x-full transition-transform duration-300 ease-out">
+            <!-- Menu Header -->
+            <div class="bg-gradient-to-r from-forest-900 via-forest-800 to-forest-900 px-6 py-5 flex items-center justify-between">
+                <div>
+                    <h3 class="font-display text-lg text-white font-semibold">Contents</h3>
+                    <p class="text-forest-300 text-xs mt-0.5">14 sections</p>
+                </div>
+                <button id="mobileMenuClose" class="p-2 -mr-2 text-white/80 hover:text-white transition-colors" aria-label="Close menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Menu Content -->
+            <div class="overflow-y-auto h-[calc(100%-76px)] py-4 px-4">
+                <nav id="mobileMenuToc" class="space-y-1"></nav>
+            </div>
+        </div>
+    </div>
 
     <!-- Hero -->
     <header id="hero" class="relative min-h-screen flex flex-col items-center justify-center text-cream-100 overflow-hidden">
@@ -958,6 +986,17 @@
                 `).join('');
             }
 
+            // Mobile Menu TOC
+            const mobileMenuToc = document.getElementById('mobileMenuToc');
+            if (mobileMenuToc) {
+                mobileMenuToc.innerHTML = plan.sections.map((section, index) => `
+                    <a href="#section-${section.id}" class="group flex items-center gap-3 px-3 py-3 rounded-xl text-gray-600 hover:bg-forest-50 hover:text-forest-800 transition-all">
+                        <span class="flex-shrink-0 w-8 h-8 rounded-lg bg-forest-100 group-hover:bg-forest-500 group-hover:text-white flex items-center justify-center text-forest-700 text-sm font-bold transition-all">${index + 1}</span>
+                        <span class="font-medium text-sm">${section.title}</span>
+                    </a>
+                `).join('');
+            }
+
             // Sections
             const container = document.getElementById('sectionsContainer');
             let html = '';
@@ -1171,8 +1210,55 @@
             requestAnimationFrame(update);
         }
 
+        // ============================================
+        // MOBILE MENU
+        // ============================================
+        function initMobileMenu() {
+            const menuBtn = document.getElementById('mobileMenuBtn');
+            const menuOverlay = document.getElementById('mobileMenuOverlay');
+            const menuPanel = document.getElementById('mobileMenuPanel');
+            const menuClose = document.getElementById('mobileMenuClose');
+
+            function openMenu() {
+                menuOverlay.classList.remove('opacity-0', 'invisible');
+                menuOverlay.classList.add('opacity-100');
+                menuPanel.classList.remove('translate-x-full');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeMenu() {
+                menuOverlay.classList.add('opacity-0');
+                menuPanel.classList.add('translate-x-full');
+                setTimeout(() => {
+                    menuOverlay.classList.add('invisible');
+                    document.body.style.overflow = '';
+                }, 300);
+            }
+
+            menuBtn.addEventListener('click', openMenu);
+            menuClose.addEventListener('click', closeMenu);
+            menuOverlay.addEventListener('click', (e) => {
+                if (e.target === menuOverlay) closeMenu();
+            });
+
+            // Close on escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !menuOverlay.classList.contains('invisible')) {
+                    closeMenu();
+                }
+            });
+
+            // Close menu when clicking a section link
+            document.getElementById('mobileMenuToc').addEventListener('click', (e) => {
+                if (e.target.closest('a')) {
+                    closeMenu();
+                }
+            });
+        }
+
         // Initialize
         loadPlan();
+        initMobileMenu();
     </script>
 </body>
 </html>
