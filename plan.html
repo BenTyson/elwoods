@@ -1154,7 +1154,7 @@
 
         function animateValue(el) {
             const text = el.textContent;
-            const match = text.match(/^(\$?)(\d+(?:,\d{3})*(?:\.\d+)?)(K?%?)/);
+            const match = text.match(/^(\$?)(\d+(?:,\d{3})*(?:\.\d+)?)([KBx%]*)/);
             if (!match) return;
 
             const [, prefix, numStr, suffix] = match;
