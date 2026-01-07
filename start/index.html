@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Woods | Startup Homebase</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../public/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../public/favicon-16x16.png">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        forest: {
+                            950: '#0a140a',
+                            900: '#1a2e1a',
+                            800: '#2d4a3e',
+                            700: '#3d6b4f',
+                            600: '#4a7c59',
+                            500: '#5a9268',
+                            400: '#7ab088',
+                            300: '#a3c9ad',
+                            200: '#c8dece',
+                            100: '#e8f0ea',
+                            50: '#f4f8f5',
+                        },
+                        gold: {
+                            600: '#a68a3a',
+                            500: '#c9a959',
+                            400: '#d4b86a',
+                            300: '#e2cc8f',
+                            200: '#f0e4c4',
+                        },
+                        cream: {
+                            100: '#faf9f6',
+                            200: '#f5f2eb',
+                            300: '#e8e4d9',
+                        }
+                    },
+                    fontFamily: {
+                        'display': ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        'body': ['"Source Serif 4"', 'Georgia', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+
+    <style>
+        html { scroll-behavior: smooth; }
+        body { overflow-x: hidden; }
+
+        ::selection {
+            background: rgba(90, 146, 104, 0.3);
+            color: #1a2e1a;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #f4f8f5; }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #5a9268 0%, #3d6b4f 100%);
+            border-radius: 5px;
+            border: 2px solid #f4f8f5;
+        }
+
+        /* Animations */
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(201, 169, 89, 0.4)); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 40px rgba(201, 169, 89, 0.7)); transform: scale(1.02); }
+        }
+
+        @keyframes bob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        .fade-in-up { animation: fade-in-up 1s ease-out forwards; }
+        .fade-in-up-delay-1 { animation: fade-in-up 1s ease-out 0.3s forwards; opacity: 0; }
+        .fade-in-up-delay-2 { animation: fade-in-up 1s ease-out 0.6s forwards; opacity: 0; }
+        .hero-logo { animation: glow-pulse 4s ease-in-out infinite; }
+        .scroll-indicator { animation: bob 2s ease-in-out infinite; }
+
+        /* Reveal on scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* Card hover */
+        .card-premium {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-premium:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px -15px rgba(26, 46, 26, 0.12), 0 8px 20px -10px rgba(26, 46, 26, 0.08);
+        }
+
+        /* Checkbox styling */
+        .checkbox-custom {
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border: 2px solid #a3c9ad;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+            position: relative;
+        }
+        .checkbox-custom:checked {
+            background: linear-gradient(135deg, #5a9268 0%, #3d6b4f 100%);
+            border-color: #3d6b4f;
+        }
+        .checkbox-custom:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .checkbox-custom:hover { border-color: #5a9268; }
+
+        /* Checked item styling */
+        .checklist-item.checked label { color: #9ca3af; text-decoration: line-through; }
+        .checklist-item.checked .item-note { opacity: 0.5; }
+
+        /* Priority badges */
+        .priority-essential {
+            background: linear-gradient(135deg, rgba(201, 169, 89, 0.15) 0%, rgba(201, 169, 89, 0.25) 100%);
+            color: #a68a3a;
+            border: 1px solid rgba(201, 169, 89, 0.4);
+        }
+        .priority-important {
+            background: linear-gradient(135deg, rgba(90, 146, 104, 0.1) 0%, rgba(90, 146, 104, 0.2) 100%);
+            color: #4a7c59;
+            border: 1px solid rgba(90, 146, 104, 0.3);
+        }
+        .priority-optional {
+            background: rgba(156, 163, 175, 0.1);
+            color: #6b7280;
+            border: 1px solid rgba(156, 163, 175, 0.3);
+        }
+
+        /* Stats cards */
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            position: relative;
+            overflow: hidden;
+        }
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #5a9268 0%, #c9a959 100%);
+        }
+
+        /* Notes textarea */
+        .notes-textarea {
+            background: rgba(248, 250, 248, 0.8);
+            border: 1px solid #c8dece;
+            border-radius: 12px;
+            padding: 1rem;
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1rem;
+            color: #374151;
+            resize: vertical;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .notes-textarea:focus {
+            outline: none;
+            border-color: #5a9268;
+            box-shadow: 0 0 0 3px rgba(90, 146, 104, 0.1);
+        }
+
+        /* Category accordion */
+        .category-header {
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        .category-header:hover { background: rgba(90, 146, 104, 0.05); }
+        .category-body { display: block; }
+        .category-body.collapsed { display: none; }
+        .toggle-icon { transition: transform 0.3s ease; }
+        .toggle-icon.collapsed { transform: rotate(-90deg); }
+    </style>
+</head>
+<body class="font-body text-gray-700 bg-forest-50 min-h-screen">
+    <!-- Animated background -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden -z-10">
+        <div class="absolute -top-40 -right-40 w-[700px] h-[700px] rounded-full bg-gradient-to-br from-emerald-100/50 to-teal-50/30 blur-3xl animate-pulse" style="animation-duration: 8s;"></div>
+        <div class="absolute top-1/3 -left-32 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-amber-100/40 to-yellow-50/20 blur-3xl animate-pulse" style="animation-duration: 10s; animation-delay: 2s;"></div>
+        <div class="absolute bottom-0 left-0 right-0 h-[500px] bg-gradient-to-t from-forest-100/60 via-forest-50/30 to-transparent"></div>
+    </div>
+
+    <!-- Hero -->
+    <header class="relative min-h-[60vh] flex flex-col items-center justify-center text-cream-100 overflow-hidden">
+        <!-- Background -->
+        <div class="absolute inset-0">
+            <img src="../public/ElWoods_ForestBanner2.jpg" alt="" class="w-full h-full object-cover" style="object-position: center 30%;" loading="eager">
+            <div class="absolute inset-0 bg-gradient-to-b from-forest-950/80 via-forest-950/60 to-forest-950/90"></div>
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10 text-center px-6 py-12">
+            <div class="fade-in-up mb-6">
+                <img src="../public/ElWoods_Stamp.png" alt="El Woods" class="hero-logo w-32 h-32 md:w-40 md:h-40 mx-auto opacity-90">
+            </div>
+
+            <h1 class="fade-in-up-delay-1 font-display text-4xl md:text-5xl text-white font-semibold mb-4">
+                Startup Homebase
+            </h1>
+
+            <p class="fade-in-up-delay-2 text-lg md:text-xl font-light text-cream-200/90 max-w-xl mx-auto">
+                Planning & preparation for the El Woods launch
+            </p>
+        </div>
+
+        <!-- Scroll indicator -->
+        <a href="#stats" class="scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 text-cream-200/80 hover:text-gold-400 transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </a>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 md:px-8 -mt-16 relative z-20 pb-20">
+
+        <!-- Stats Bar -->
+        <section id="stats" class="reveal grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+            <div class="stat-card">
+                <div class="font-display text-3xl md:text-4xl font-bold text-forest-800" id="total-items">0</div>
+                <div class="text-sm text-gray-500 mt-1">Total Items</div>
+            </div>
+            <div class="stat-card">
+                <div class="font-display text-3xl md:text-4xl font-bold text-forest-600" id="completed-items">0</div>
+                <div class="text-sm text-gray-500 mt-1">Acquired</div>
+            </div>
+            <div class="stat-card">
+                <div class="font-display text-3xl md:text-4xl font-bold text-gold-500" id="essential-remaining">0</div>
+                <div class="text-sm text-gray-500 mt-1">Essential Left</div>
+            </div>
+            <div class="stat-card">
+                <div class="font-display text-3xl md:text-4xl font-bold text-forest-700" id="completion-percent">0%</div>
+                <div class="text-sm text-gray-500 mt-1">Complete</div>
+            </div>
+        </section>
+
+        <!-- Coffee Bar Section -->
+        <article class="reveal card-premium bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-forest-900/10 overflow-hidden border border-forest-100 mb-8">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-forest-900 via-forest-800 to-forest-900 px-6 md:px-10 py-6 relative overflow-hidden">
+                <div class="absolute inset-0 opacity-10">
+                    <div class="absolute top-0 right-0 w-40 h-40 bg-gold-500 rounded-full blur-3xl"></div>
+                </div>
+                <div class="relative flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-white/10 backdrop-blur flex items-center justify-center text-gold-400">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8h1a4 4 0 110 8h-1M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8zm0 0V6a2 2 0 012-2h10a2 2 0 012 2v2"/></svg>
+                    </div>
+                    <div>
+                        <h2 class="font-display text-xl md:text-2xl text-white font-semibold">Coffee Bar Equipment</h2>
+                        <p class="text-forest-300 text-sm mt-1">Daytime popup at existing bar venue</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Body -->
+            <div class="px-6 md:px-10 py-8">
+                <!-- Categories Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" id="categories-container">
+                    <!-- Categories will be injected here -->
+                </div>
+
+                <!-- Notes Section -->
+                <div class="mt-10 pt-8 border-t border-forest-100">
+                    <h3 class="font-display text-xl text-forest-700 font-semibold mb-4">Notes & Decisions</h3>
+                    <textarea id="coffee-bar-notes" class="notes-textarea w-full min-h-[150px]" placeholder="Vendor contacts, pricing notes, questions to ask the venue..."></textarea>
+                </div>
+
+                <!-- Actions -->
+                <div class="mt-8 flex flex-wrap gap-4">
+                    <button onclick="saveProgress()" class="px-6 py-3 bg-gradient-to-r from-forest-600 to-forest-700 text-white font-medium rounded-xl hover:from-forest-700 hover:to-forest-800 transition-all shadow-lg shadow-forest-900/20 hover:shadow-xl hover:-translate-y-0.5">
+                        Save Progress
+                    </button>
+                    <button onclick="exportChecklist()" class="px-6 py-3 bg-white text-forest-700 font-medium rounded-xl border border-forest-200 hover:bg-forest-50 transition-all">
+                        Export Checklist
+                    </button>
+                    <button onclick="clearAll()" class="px-6 py-3 text-gray-500 font-medium rounded-xl hover:bg-gray-100 transition-all">
+                        Clear All
+                    </button>
+                </div>
+            </div>
+        </article>
+
+        <!-- Future Sections -->
+        <div class="grid md:grid-cols-3 gap-6">
+            <article class="reveal card-premium bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg shadow-forest-900/5 overflow-hidden border border-forest-100 opacity-60">
+                <div class="bg-gradient-to-r from-forest-800 to-forest-900 px-6 py-4">
+                    <div class="flex items-center gap-3">
+                        <svg class="w-5 h-5 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                        <h3 class="font-display text-lg text-white font-semibold">Venue Negotiation</h3>
+                    </div>
+                </div>
+                <div class="p-6 text-center text-gray-400 italic">Coming soon</div>
+            </article>
+
+            <article class="reveal card-premium bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg shadow-forest-900/5 overflow-hidden border border-forest-100 opacity-60">
+                <div class="bg-gradient-to-r from-forest-800 to-forest-900 px-6 py-4">
+                    <div class="flex items-center gap-3">
+                        <svg class="w-5 h-5 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        <h3 class="font-display text-lg text-white font-semibold">Permits & Legal</h3>
+                    </div>
+                </div>
+                <div class="p-6 text-center text-gray-400 italic">Coming soon</div>
+            </article>
+
+            <article class="reveal card-premium bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg shadow-forest-900/5 overflow-hidden border border-forest-100 opacity-60">
+                <div class="bg-gradient-to-r from-forest-800 to-forest-900 px-6 py-4">
+                    <div class="flex items-center gap-3">
+                        <svg class="w-5 h-5 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                        <h3 class="font-display text-lg text-white font-semibold">Launch Day Prep</h3>
+                    </div>
+                </div>
+                <div class="p-6 text-center text-gray-400 italic">Coming soon</div>
+            </article>
+        </div>
+
+        <!-- Back Link -->
+        <div class="mt-12 text-center">
+            <a href="/" class="inline-flex items-center gap-2 text-forest-600 hover:text-forest-800 transition-colors font-medium">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                Back to El Woods
+            </a>
+        </div>
+    </main>
+
+    <script>
+        // SVG Icons
+        const icons = {
+            espresso: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8h1a4 4 0 110 8h-1M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8zm0 0V6a2 2 0 012-2h10a2 2 0 012 2v2"/></svg>',
+            brewing: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 12c0 4.14-3.358 7.5-7.5 7.5S4.5 16.14 4.5 12m15 0c0-4.14-3.358-7.5-7.5-7.5S4.5 7.86 4.5 12m15 0H21m-16.5 0H3m9-9v1.5m0 15V21m6.36-14.86l-1.06 1.06M7.76 16.24l-1.06 1.06m0-10.6l1.06 1.06m9.18 9.18l1.06 1.06"/></svg>',
+            tea: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>',
+            refrigeration: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2zm0 8h14M9 12v5m0-9V5"/></svg>',
+            cups: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3h6l1 4H8l1-4zm-1 4v10a4 4 0 004 4h0a4 4 0 004-4V7H8z"/></svg>',
+            ingredients: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>',
+            pos: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>',
+            cleaning: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>',
+            branding: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>',
+            phase2: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>',
+        };
+
+        // Equipment data
+        const categories = [
+            {
+                id: 'espresso',
+                name: 'Espresso & Coffee Core',
+                icon: icons.espresso,
+                items: [
+                    { id: 'espresso-machine', name: 'Espresso machine', note: '2-group commercial or high-end prosumer. Consider used/refurbished.', priority: 'essential', price: '$2,000 - $8,000' },
+                    { id: 'grinder', name: 'Burr grinder (espresso)', note: 'Commercial quality. Baratza Sette 270, Eureka Mignon, or similar.', priority: 'essential', price: '$400 - $1,500' },
+                    { id: 'tamper', name: 'Tamper (58mm or match portafilter)', note: 'Calibrated tamper recommended for consistency.', priority: 'essential', price: '$30 - $150' },
+                    { id: 'knock-box', name: 'Knock box', note: 'For disposing of used pucks.', priority: 'essential', price: '$25 - $80' },
+                    { id: 'milk-pitchers', name: 'Milk frothing pitchers (12oz, 20oz)', note: 'Get 3-4 of each size. Stainless steel.', priority: 'essential', price: '$40 - $100' },
+                    { id: 'thermometer', name: 'Milk thermometer', note: 'Clip-on style for pitchers.', priority: 'important', price: '$10 - $25' },
+                    { id: 'shot-glasses', name: 'Shot glasses / measuring cups', note: '2oz marked glasses for pulling shots.', priority: 'important', price: '$15 - $40' },
+                    { id: 'scale', name: 'Digital scale (0.1g precision)', note: 'For dosing and shot timing.', priority: 'important', price: '$25 - $150' },
+                    { id: 'distribution-tool', name: 'Distribution tool / WDT', note: 'For even extraction.', priority: 'optional', price: '$20 - $60' },
+                ]
+            },
+            {
+                id: 'brewing',
+                name: 'Alternative Brewing',
+                icon: icons.brewing,
+                items: [
+                    { id: 'cold-brew', name: 'Cold brew system', note: 'Toddy or commercial cold brew maker.', priority: 'important', price: '$40 - $300' },
+                    { id: 'pour-over', name: 'Pour over setup (V60 or Chemex)', note: 'For single-origin offerings.', priority: 'optional', price: '$25 - $80' },
+                    { id: 'pour-over-filters', name: 'Pour over filters', note: 'Match your dripper type.', priority: 'optional', price: '$10 - $25' },
+                    { id: 'gooseneck', name: 'Gooseneck kettle (electric)', note: 'Temperature control preferred.', priority: 'optional', price: '$50 - $200' },
+                    { id: 'batch-brewer', name: 'Batch brewer / airpot system', note: 'For drip coffee if offering.', priority: 'optional', price: '$200 - $800' },
+                ]
+            },
+            {
+                id: 'tea',
+                name: 'Tea & Matcha',
+                icon: icons.tea,
+                items: [
+                    { id: 'electric-kettle-tea', name: 'Electric kettle with temp control', note: 'Different teas need different temps. 160-212°F range.', priority: 'essential', price: '$50 - $150' },
+                    { id: 'tea-selection', name: 'Loose leaf tea selection', note: 'Start with 4-6 varieties: green, black, herbal, chai.', priority: 'essential', price: '$60 - $150' },
+                    { id: 'tea-steepers', name: 'Tea steepers / infusers', note: 'Individual cup infusers or teapots with built-in strainers.', priority: 'essential', price: '$20 - $60' },
+                    { id: 'matcha-powder', name: 'Ceremonial grade matcha', note: 'Quality matters. Source from reputable supplier.', priority: 'essential', price: '$30 - $80' },
+                    { id: 'matcha-whisk', name: 'Matcha whisk (chasen)', note: 'Bamboo traditional whisk. Get 2-3 as they wear out.', priority: 'essential', price: '$15 - $40' },
+                    { id: 'matcha-bowl', name: 'Matcha bowl (chawan)', note: 'Wide bowl for whisking. Can use any wide ceramic bowl.', priority: 'important', price: '$15 - $50' },
+                    { id: 'matcha-sifter', name: 'Matcha sifter / fine mesh strainer', note: 'Prevents clumps. Essential for smooth drinks.', priority: 'important', price: '$8 - $20' },
+                    { id: 'matcha-scoop', name: 'Matcha scoop (chashaku)', note: 'Bamboo scoop for measuring. Or use 1/2 tsp measure.', priority: 'optional', price: '$5 - $15' },
+                    { id: 'milk-frother-tea', name: 'Electric milk frother', note: 'For matcha lattes. Handheld or countertop.', priority: 'important', price: '$15 - $80' },
+                    { id: 'honey-dispenser', name: 'Honey dispenser', note: 'Many tea drinkers prefer honey over sugar.', priority: 'important', price: '$10 - $25' },
+                    { id: 'tea-timer', name: 'Tea timer / hourglass set', note: 'Visual timer for steeping. Adds experience element.', priority: 'optional', price: '$10 - $30' },
+                    { id: 'tea-menu-cards', name: 'Tea menu with steep times', note: 'Educate customers on proper brewing.', priority: 'important', price: '$15 - $40' },
+                ]
+            },
+            {
+                id: 'refrigeration',
+                name: 'Refrigeration & Storage',
+                icon: icons.refrigeration,
+                items: [
+                    { id: 'under-counter-fridge', name: 'Under-counter refrigerator', note: 'Check if bar has one you can use for milk.', priority: 'essential' },
+                    { id: 'pastry-case', name: 'Pastry display case', note: 'Countertop, non-refrigerated is fine for baked goods.', priority: 'important' },
+                    { id: 'coffee-containers', name: 'Airtight coffee bean containers', note: 'Keep beans fresh. Get 2-3 for rotation.', priority: 'important' },
+                    { id: 'syrup-organizer', name: 'Syrup bottle organizer/rack', note: 'Keeps station organized.', priority: 'optional' },
+                ]
+            },
+            {
+                id: 'cups',
+                name: 'Cups & Service Items',
+                icon: icons.cups,
+                items: [
+                    { id: 'hot-cups', name: 'Hot cups (8oz, 12oz, 16oz)', note: 'Compostable/eco-friendly. Start with 200-500 of each.', priority: 'essential' },
+                    { id: 'hot-lids', name: 'Hot cup lids', note: 'Match cup sizes. Compostable.', priority: 'essential' },
+                    { id: 'sleeves', name: 'Cup sleeves', note: 'Kraft/recycled paper.', priority: 'essential' },
+                    { id: 'cold-cups', name: 'Cold cups (12oz, 16oz, 20oz)', note: 'Clear compostable for iced drinks.', priority: 'essential' },
+                    { id: 'cold-lids', name: 'Cold cup lids (flat & dome)', note: 'Dome for whipped cream drinks.', priority: 'essential' },
+                    { id: 'straws', name: 'Straws (paper or compostable)', note: 'No plastic. Paper or PLA.', priority: 'essential' },
+                    { id: 'napkins', name: 'Napkins', note: 'Recycled/unbleached.', priority: 'essential' },
+                    { id: 'stirrers', name: 'Stirrers (wooden)', note: 'No plastic stir sticks.', priority: 'important' },
+                    { id: 'pastry-bags', name: 'Pastry bags / wax paper', note: 'For to-go baked goods.', priority: 'important' },
+                    { id: 'tongs', name: 'Serving tongs', note: 'For pastry handling.', priority: 'essential' },
+                ]
+            },
+            {
+                id: 'ingredients',
+                name: 'Coffee & Ingredients',
+                icon: icons.ingredients,
+                items: [
+                    { id: 'espresso-beans', name: 'Espresso beans (5-10 lbs to start)', note: 'Local roaster partnership. Get house blend first.', priority: 'essential' },
+                    { id: 'decaf', name: 'Decaf espresso beans', note: 'Swiss water process preferred.', priority: 'important' },
+                    { id: 'whole-milk', name: 'Whole milk', note: 'Local dairy if possible.', priority: 'essential' },
+                    { id: 'oat-milk', name: 'Oat milk (barista edition)', note: 'Oatly, Minor Figures, or similar. Froths well.', priority: 'essential' },
+                    { id: 'almond-milk', name: 'Almond milk (barista edition)', note: 'Califia Barista or similar.', priority: 'important' },
+                    { id: 'vanilla-syrup', name: 'Vanilla syrup', note: 'Monin, Torani, or local. Most popular flavor.', priority: 'essential' },
+                    { id: 'caramel-syrup', name: 'Caramel syrup', note: 'Second most popular.', priority: 'important' },
+                    { id: 'mocha-sauce', name: 'Chocolate / mocha sauce', note: 'Ghirardelli or quality brand.', priority: 'essential' },
+                    { id: 'honey', name: 'Honey (squeeze bottle)', note: 'Local honey.', priority: 'important' },
+                    { id: 'sugar', name: 'Sugar (raw, white)', note: 'Dispenser or packets.', priority: 'essential' },
+                    { id: 'sweeteners', name: 'Alternative sweeteners', note: 'Stevia, monk fruit, etc.', priority: 'optional' },
+                    { id: 'cinnamon', name: 'Cinnamon / cocoa powder shakers', note: 'For topping drinks.', priority: 'important' },
+                    { id: 'whipped-cream', name: 'Whipped cream dispenser + N2O', note: 'Or use canned for simplicity.', priority: 'important' },
+                ]
+            },
+            {
+                id: 'pos',
+                name: 'POS & Operations',
+                icon: icons.pos,
+                items: [
+                    { id: 'pos-system', name: 'POS system (iPad + Square/Toast)', note: 'Square is easy to start. Consider Toast for growth.', priority: 'essential' },
+                    { id: 'card-reader', name: 'Card reader', note: 'Comes with POS usually. Tap-to-pay essential.', priority: 'essential' },
+                    { id: 'cash-drawer', name: 'Cash drawer', note: 'Small drawer is fine for popup.', priority: 'important' },
+                    { id: 'receipt-printer', name: 'Receipt printer', note: 'Optional for popup. Digital receipts work.', priority: 'optional' },
+                    { id: 'tip-jar', name: 'Tip jar', note: 'Clear, visible. Digital tips through POS too.', priority: 'important' },
+                    { id: 'menu-board', name: 'Menu board / display', note: 'Chalkboard, printed, or digital display.', priority: 'essential' },
+                    { id: 'price-list', name: 'Price list / menu cards', note: 'Printed menus for counter.', priority: 'important' },
+                    { id: 'wifi', name: 'WiFi access for POS', note: 'Confirm bar has reliable WiFi or use hotspot.', priority: 'essential' },
+                ]
+            },
+            {
+                id: 'cleaning',
+                name: 'Cleaning & Sanitation',
+                icon: icons.cleaning,
+                items: [
+                    { id: 'pitcher-rinser', name: 'Milk pitcher rinser', note: 'Installs in sink. Essential for milk hygiene.', priority: 'important' },
+                    { id: 'cleaning-tablets', name: 'Espresso machine cleaning tablets', note: 'Cafiza or similar. Daily backflush.', priority: 'essential' },
+                    { id: 'grinder-cleaner', name: 'Grinder cleaning tablets', note: 'Grindz or similar. Weekly.', priority: 'important' },
+                    { id: 'steam-wand-cleaner', name: 'Steam wand cleaning solution', note: 'Rinza or similar.', priority: 'important' },
+                    { id: 'bar-towels', name: 'Bar towels / microfiber cloths', note: 'Get 10-20. Color code: one for steam wand, one for counter.', priority: 'essential' },
+                    { id: 'sanitizer', name: 'Food-safe sanitizer spray', note: 'For counters and equipment.', priority: 'essential' },
+                    { id: 'dish-soap', name: 'Dish soap', note: 'For pitchers, tools.', priority: 'essential' },
+                    { id: 'trash-bags', name: 'Trash bags (various sizes)', note: 'Including compost bags if applicable.', priority: 'essential' },
+                ]
+            },
+            {
+                id: 'branding',
+                name: 'Branding & Signage',
+                icon: icons.branding,
+                items: [
+                    { id: 'logo-signage', name: 'El Woods logo signage', note: 'A-frame, banner, or counter sign.', priority: 'essential' },
+                    { id: 'cup-stamps', name: 'Cup stamps / stickers', note: 'Brand your cups. Custom stamps or printed sleeves.', priority: 'important' },
+                    { id: 'business-cards', name: 'Business cards / promo cards', note: 'With Instagram, future location info.', priority: 'important' },
+                    { id: 'qr-code', name: 'QR code display (Instagram/menu)', note: 'Printed stand for counter.', priority: 'important' },
+                    { id: 'aprons', name: 'Branded aprons', note: 'Forest green with El Woods logo.', priority: 'optional' },
+                ]
+            },
+            {
+                id: 'phase2',
+                name: 'Nice-to-Haves (Phase 2)',
+                icon: icons.phase2,
+                items: [
+                    { id: 'water-filter', name: 'Water filtration system', note: 'Critical for espresso quality and machine longevity.', priority: 'important' },
+                    { id: 'latte-art-tools', name: 'Latte art tools (etching pen)', note: 'For fancy drinks.', priority: 'optional' },
+                    { id: 'plants', name: 'Plants / greenery for station', note: 'On-brand forest vibes.', priority: 'optional' },
+                    { id: 'bluetooth-speaker', name: 'Bluetooth speaker', note: 'For your playlist (check with bar).', priority: 'optional' },
+                    { id: 'timer', name: 'Shot timer', note: 'If machine doesn\'t have one built in.', priority: 'optional' },
+                ]
+            },
+        ];
+
+        // Sort items by priority
+        const priorityOrder = { essential: 0, important: 1, optional: 2 };
+        function sortByPriority(items) {
+            return [...items].sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
+        }
+
+        // Render categories
+        function renderCategories() {
+            const container = document.getElementById('categories-container');
+            container.innerHTML = categories.map(cat => {
+                const sortedItems = sortByPriority(cat.items);
+                return `
+                <div class="bg-forest-50/50 rounded-xl border border-forest-100 overflow-hidden" data-category="${cat.id}">
+                    <div class="category-header px-5 py-4 flex items-center justify-between" onclick="toggleCategory('${cat.id}')">
+                        <div class="flex items-center gap-3">
+                            <span class="text-forest-600">${cat.icon}</span>
+                            <h4 class="font-display text-lg text-forest-800 font-semibold">${cat.name}</h4>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-sm text-forest-600 font-medium category-progress" data-category="${cat.id}">0/${cat.items.length}</span>
+                            <svg class="toggle-icon w-4 h-4 text-forest-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </div>
+                    </div>
+                    <div class="category-body px-5 pb-5">
+                        <ul class="space-y-3">
+                            ${sortedItems.map(item => `
+                                <li class="checklist-item flex items-start gap-3 p-3 bg-white rounded-lg border border-forest-100/50 hover:border-forest-200 transition-colors">
+                                    <input type="checkbox" id="${item.id}" class="checkbox-custom mt-0.5">
+                                    <label for="${item.id}" class="flex-1 cursor-pointer">
+                                        <span class="text-gray-800 font-medium">${item.name}</span>
+                                        ${item.price ? `<span class="text-forest-600 font-medium text-sm ml-2">${item.price}</span>` : ''}
+                                        <span class="item-note block text-sm text-gray-500 mt-0.5">${item.note}</span>
+                                    </label>
+                                    <span class="priority-${item.priority} text-xs px-2.5 py-1 rounded-full font-medium uppercase tracking-wide flex-shrink-0">
+                                        ${item.priority}
+                                    </span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `;
+            }).join('');
+        }
+
+        // Toggle category
+        function toggleCategory(catId) {
+            const container = document.querySelector(`[data-category="${catId}"]`);
+            const body = container.querySelector('.category-body');
+            const icon = container.querySelector('.toggle-icon');
+            body.classList.toggle('collapsed');
+            icon.classList.toggle('collapsed');
+        }
+
+        // Update stats
+        function updateStats() {
+            const allCheckboxes = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+            const checkedBoxes = document.querySelectorAll('.checklist-item input[type="checkbox"]:checked');
+
+            let essentialRemaining = 0;
+            document.querySelectorAll('.priority-essential').forEach(badge => {
+                const checkbox = badge.closest('.checklist-item').querySelector('input');
+                if (!checkbox.checked) essentialRemaining++;
+            });
+
+            document.getElementById('total-items').textContent = allCheckboxes.length;
+            document.getElementById('completed-items').textContent = checkedBoxes.length;
+            document.getElementById('essential-remaining').textContent = essentialRemaining;
+            document.getElementById('completion-percent').textContent = Math.round((checkedBoxes.length / allCheckboxes.length) * 100) + '%';
+
+            // Update category progress
+            categories.forEach(cat => {
+                const catItems = document.querySelectorAll(`[data-category="${cat.id}"] input[type="checkbox"]`);
+                const catChecked = document.querySelectorAll(`[data-category="${cat.id}"] input[type="checkbox"]:checked`);
+                const progressEl = document.querySelector(`.category-progress[data-category="${cat.id}"]`);
+                if (progressEl) progressEl.textContent = `${catChecked.length}/${catItems.length}`;
+            });
+        }
+
+        // Checkbox handlers
+        function initCheckboxes() {
+            document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    this.closest('.checklist-item').classList.toggle('checked', this.checked);
+                    updateStats();
+                    saveProgress();
+                });
+            });
+        }
+
+        // Save/Load
+        function saveProgress() {
+            const state = {};
+            document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach(cb => {
+                state[cb.id] = cb.checked;
+            });
+            localStorage.setItem('elwoods-startup-checklist', JSON.stringify(state));
+            localStorage.setItem('elwoods-startup-notes', document.getElementById('coffee-bar-notes').value);
+        }
+
+        function loadProgress() {
+            const saved = localStorage.getItem('elwoods-startup-checklist');
+            if (saved) {
+                const state = JSON.parse(saved);
+                Object.keys(state).forEach(id => {
+                    const checkbox = document.getElementById(id);
+                    if (checkbox) {
+                        checkbox.checked = state[id];
+                        checkbox.closest('.checklist-item').classList.toggle('checked', state[id]);
+                    }
+                });
+            }
+            const notes = localStorage.getItem('elwoods-startup-notes');
+            if (notes) document.getElementById('coffee-bar-notes').value = notes;
+            updateStats();
+        }
+
+        // Export
+        function exportChecklist() {
+            let text = 'EL WOODS COFFEE BAR CHECKLIST\n================================\n';
+            categories.forEach(cat => {
+                text += `\n${cat.name}\n${'-'.repeat(cat.name.length)}\n`;
+                cat.items.forEach(item => {
+                    const checkbox = document.getElementById(item.id);
+                    const status = checkbox?.checked ? '[x]' : '[ ]';
+                    text += `${status} ${item.name} (${item.priority})\n`;
+                });
+            });
+            const notes = document.getElementById('coffee-bar-notes').value;
+            if (notes) text += '\n\nNOTES\n-----\n' + notes;
+
+            const blob = new Blob([text], { type: 'text/plain' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'elwoods-coffee-bar-checklist.txt';
+            a.click();
+        }
+
+        // Clear
+        function clearAll() {
+            if (confirm('Clear all checkboxes? This cannot be undone.')) {
+                document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach(cb => {
+                    cb.checked = false;
+                    cb.closest('.checklist-item').classList.remove('checked');
+                });
+                updateStats();
+                localStorage.removeItem('elwoods-startup-checklist');
+            }
+        }
+
+        // Reveal on scroll
+        function initReveal() {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.1, rootMargin: '-50px' });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }
+
+        // Auto-save notes
+        document.getElementById('coffee-bar-notes')?.addEventListener('input', function() {
+            localStorage.setItem('elwoods-startup-notes', this.value);
+        });
+
+        // Init
+        renderCategories();
+        initCheckboxes();
+        loadProgress();
+        initReveal();
+    </script>
+</body>
+</html>
